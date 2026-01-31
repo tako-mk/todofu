@@ -45,7 +45,7 @@ html, body {
     position: relative;
     width: 1280px;
     height: 720px;
-    background: #000;
+    background: #ffffff;
     overflow: hidden;
 }
 
@@ -135,10 +135,10 @@ html, body {
     height: 250px;
 
     padding: 1em;
-    border-radius: 16px;
+    border-radius: 30px;
     border: 2px solid rgb(92, 89, 86);
 
-    background: rgba(255, 255, 255, 0.95);
+    background: rgb(255, 255, 255);
     backdrop-filter: blur(4px);
 
     text-align: center;
@@ -160,6 +160,104 @@ html, body {
     transition: opacity 0.3s;
 }
 
+/* ==============================
+   Home UI
+============================== */
+
+#home-screen {
+    position: absolute;
+    background: url("../assets/images/home-background.jpg") center / contain no-repeat;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+}
+
+.top-bar {
+    height: 72px;
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 24px;
+    font-size: 28px;
+}
+
+.main-area {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.player-character {
+    height: 60%;
+    animation: float 3s ease-in-out infinite;
+}
+
+.bottom-bar {
+    height: 120px;
+    display: flex;
+    padding: 16px;
+    gap: 16px;
+}
+
+.event-area {
+    flex: 1;
+    background: #fff;
+    border-radius: 16px;
+    padding: 12px;
+}
+
+.menu-bar {
+    display: flex;
+    width: 650px;
+    height: 90px;
+    border-radius: 18px;
+    background: linear-gradient(#fff, #f0f0f0);
+    overflow: hidden;
+    box-shadow: 0 6px 0 #c9c9c9;
+}
+
+/* 各メニュー */
+.menu-item {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background: transparent;
+    font-size: 22px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.15s;
+}
+
+.menu-item:first-child {
+    border-left: none;
+}
+
+/* 縦区切り線 */
+.menu-item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 15%;
+    width: 2px;
+    height: 70%;
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.menu-item:hover {
+    background: rgba(255, 230, 160, 0.4);
+    transform: translateY(2px);
+}
+
+.menu-item:active {
+    background: rgba(255, 210, 100, 0.6);
+    transform: translateY(2px);
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+}
+
+
+
 
 /* ==============================
    Animations
@@ -178,6 +276,24 @@ html, body {
     to {
         opacity: 1;
         transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translate(0, 0);
+    }
+    25% {
+        transform: translate(3px, -8px);
+    }
+    50% {
+        transform: translate(0, -14px);
+    }
+    75% {
+        transform: translate(-3px, -8px);
+    }
+    100% {
+        transform: translate(0, 0);
     }
 }
 

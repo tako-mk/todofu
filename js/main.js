@@ -27,6 +27,22 @@ function resizeGame() {
     root.style.transform = `scale(${scale})`;
 }
 
+const titleScreen = document.getElementById("title-screen");
+const loadingScreen = document.getElementById("loading-screen");
+const homeScreen = document.getElementById("home-screen");
+
+function showScreen(name) {
+    // 全部一旦非表示
+    titleScreen.style.display = "none";
+    loadingScreen.classList.remove("active");
+    homeScreen.style.display = "none";
+
+    // 指定画面だけ表示
+    if (name === "title") titleScreen.style.display = "flex";
+    if (name === "loading") loadingScreen.classList.add("active");
+    if (name === "home") homeScreen.style.display = "flex";
+}
+
 /**
  * タイトル → ローディング → ゲーム開始
  * までの全体フローを制御
@@ -40,6 +56,7 @@ function startFlow() {
 
     // フェード完了後にローディング開始
     setTimeout(() => {
+        showScreen("loading");
         startLoading();
 
         // 仮ロード時間（実際はここで画像・音声などのロードを行う）
@@ -57,6 +74,7 @@ function startFlow() {
  */
 function startGame() {
     console.log("GAME START");
+    showScreen("home");
     // initGame();
 }
 
@@ -64,13 +82,15 @@ function startGame() {
 window.addEventListener("resize", resizeGame);
 resizeGame();
 
-// 入力受付（クリック or キー入力で開始）
+// 入力受付
 document.addEventListener("keydown", (e) => {
+    if (e.repeat) return;
     if (e.code === "Enter" || e.code === "Space") {
         startFlow();
     }
 });
-document.addEventListener("click", startFlow);
+titleScreen.addEventListener("pointerdown", startFlow);
 
 // タイトル初期化
+showScreen("title");
 initTitle();
