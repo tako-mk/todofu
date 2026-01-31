@@ -5,13 +5,32 @@
 }
 
 body {
-    color: #fff;
-    font-family: system-ui, sans-serif;
+    margin: 0;
+    background: #ffffff;
     overflow: hidden;
 }
 
-#title-screen {
+/* 画面全体 */
+#viewport {
     position: fixed;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 16:9 のゲーム画面 */
+#game-screen {
+    position: relative;
+    width: min(100vw, calc(100vh * 16 / 9));
+    height: min(100vh, calc(100vw * 9 / 16));
+    background: #000;
+    overflow: hidden;
+}
+
+/* タイトル画面 */
+#title-screen {
+    position: absolute;
     inset: 0;
     display: flex;
     flex-direction: column;
@@ -25,20 +44,88 @@ body {
 
 .tap {
     font-family: "Lucida Sans Unicode", system-ui, sans-serif;
-    position: fixed;
-    left: 380px;
-    bottom: 170px;
-    font-size: 70px;
+    color: #ffffff;
+    text-shadow: 2px 2px 0 #000000;
+    position: absolute;
+    left: 13%;
+    bottom: 20%;
+    font-size: clamp(14px, 4.5vw, 50px);
     opacity: 0.8;
     animation: blink 1.5s infinite;
 }
 
 .credit {
-    position: fixed;
-    right: 160px;
-    bottom: 12px;
-    font-size: 30px;
+    font-family: "Lucida Sans Unicode", system-ui, sans-serif;
+    position: absolute;
+    right: 3%;
+    bottom: 4%;
+    font-size: clamp(10px, 3vw, 20px);
     opacity: 0.6;
+}
+
+/* ローディング画面 */
+#loading-screen {
+    position: absolute;
+    inset: 0;
+    background: #ffffff;
+    color: #000000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.6s;
+}
+
+#loading-screen.active {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.loading-text {
+    position: absolute;
+    left: 24px;
+    bottom: 24px;
+    font-size: 18px;
+    font-family: "Lucida Sans Unicode", system-ui, sans-serif;
+    opacity: 0.8;
+}
+
+.tips-box {
+    background: rgb(255, 255, 255);
+    border: 2px solid rgb(0, 0, 0);
+    border-radius: 16px;
+    padding: 18px 28px 22px;
+    min-width: 320px;
+    max-width: 70%;
+    text-align: center;
+    backdrop-filter: blur(4px);
+    animation: tipsFade 0.8s ease;
+}
+
+.tips-title {
+    font-size: clamp(14px, 1.6vw, 18px);
+    letter-spacing: 0.15em;
+    opacity: 0.7;
+    margin-bottom: 8px;
+}
+
+.tips-text {
+    font-size: clamp(16px, 2vw, 22px);
+    line-height: 1.6;
+    transition: opacity 0.3s;
+}
+
+@keyframes tipsFade {
+    from {
+        opacity: 0;
+        transform: translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 @keyframes blink {

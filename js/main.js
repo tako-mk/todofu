@@ -1,22 +1,32 @@
-const title = document.getElementById("title-screen");
-const canvas = document.getElementById("game");
+import { initTitle, hideTitle } from "./scenes/title.js";
+import { startLoading, hideLoading } from "./scenes/loading.js";
+
+let started = false;
+
+function startFlow() {
+    if (started) return;
+    started = true;
+
+    hideTitle();
+
+    setTimeout(() => {
+        startLoading();
+
+            // 仮ロード時間（実際はここで画像・音声などロード）
+            setTimeout(() => {
+                hideLoading();
+                startGame();
+            }, 6000);
+
+    }, 600); // フェードアウト時間
+}
 
 function startGame() {
-    title.style.display = "none";
-    canvas.style.display = "block";
-    initGame();
+    console.log("GAME START");
+    // ここで game.js の initGame() を呼ぶ想定
 }
 
-function initGame() {
-    const ctx = canvas.getContext("2d");
-    canvas.width = 800;
-    canvas.height = 600;
+document.addEventListener("keydown", startFlow);
+document.addEventListener("click", startFlow);
 
-    ctx.fillStyle = "white";
-    ctx.font = "32px sans-serif";
-    ctx.textAlign = "center";
-    ctx.fillText("Game Start!", 400, 300);
-}
-
-document.addEventListener("keydown", startGame);
-document.addEventListener("click", startGame);
+initTitle();
