@@ -1,0 +1,51 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    color: #fff;
+    font-family: system-ui, sans-serif;
+    overflow: hidden;
+}
+
+#title-screen {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-image: url("../assets/images/title.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.tap {
+    font-family: "Lucida Sans Unicode", system-ui, sans-serif;
+    position: fixed;
+    left: 380px;
+    bottom: 170px;
+    font-size: 70px;
+    opacity: 0.8;
+    animation: blink 1.5s infinite;
+}
+
+.credit {
+    position: fixed;
+    right: 160px;
+    bottom: 12px;
+    font-size: 30px;
+    opacity: 0.6;
+}
+
+@keyframes blink {
+    0%, 100% { opacity: 0.2; }
+    50% { opacity: 1; }
+}
+
+canvas {
+    display: none;
+}
