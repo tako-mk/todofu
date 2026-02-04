@@ -100,7 +100,7 @@ html, body {
     justify-content: center;
     align-items: center;
 
-    background: rgb(255, 243, 222);
+    background-image: url("../assets/images/loading-background.png");
     color: #000;
 
     opacity: 0;

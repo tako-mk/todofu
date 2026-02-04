@@ -5,6 +5,7 @@
 
 import { initTitle, hideTitle } from "./scenes/title.js";
 import { startLoading, hideLoading } from "./scenes/loading.js";
+import { initHome } from "./scenes/home.js";
 
 // ゲーム開始済みフラグ（多重起動防止）
 let started = false;
@@ -74,6 +75,7 @@ function startFlow() {
  */
 function startGame() {
     console.log("GAME START");
+    initHome();
     showScreen("home");
     // initGame();
 }
