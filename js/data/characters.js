@@ -718,9 +718,96 @@ export const characters = {
             },
             e: {
                 id: "ishikawa_e",
-                subtitle: "どやぁ",
+                subtitle: "ドヤ顔みせて",
                 rarity: 4,
                 image: "assets/images/todofu/ishikawa/ishikawa-e.png"
+            }
+        }
+    },
+    nagano: {
+        name: "長野県",
+        characters: {
+            a: {
+                id: "nagano_a",
+                subtitle: "輪島塗に入り込んで",
+                rarity: 1,
+                image: "assets/images/todofu/nagano/nagano-a.png"
+            },
+            b: {
+                id: "nagano_b",
+                subtitle: "え～、ないわ～",
+                rarity: 2,
+                image: "assets/images/todofu/nagano/nagano-b.png"
+            },
+            c: {
+                id: "nagano_c",
+                subtitle: "狙います！",
+                rarity: 3,
+                image: "assets/images/todofu/nagano/nagano-c.png"
+            },
+            d: {
+                id: "nagano_d",
+                subtitle: "いい色だなぁ",
+                rarity: 4,
+                image: "assets/images/todofu/nagano/nagano-d.png"
+            }
+        }
+    },
+    toyama: {
+        name: "長野県",
+        characters: {
+            a: {
+                id: "nagano_a",
+                subtitle: "雪国そだち",
+                rarity: 1,
+                image: "assets/images/todofu/nagano/nagano-a.png"
+            },
+            b: {
+                id: "nagano_b",
+                subtitle: "つまらない日々",
+                rarity: 2,
+                image: "assets/images/todofu/nagano/nagano-b.png"
+            },
+            c: {
+                id: "nagano_c",
+                subtitle: "褒めても何も出ませんよ？",
+                rarity: 3,
+                image: "assets/images/todofu/nagano/nagano-c.png"
+            },
+            d: {
+                id: "nagano_d",
+                subtitle: "エンジョイスキーヤー",
+                rarity: 4,
+                image: "assets/images/todofu/nagano/nagano-d.png"
+            }
+        }
+    },
+    toyama: {
+        name: "富山県",
+        characters: {
+            a: {
+                id: "toyama_a",
+                subtitle: "輪島塗に入り込んで",
+                rarity: 1,
+                image: "assets/images/todofu/toyama/toyama-a.png"
+            },
+            b: {
+                id: "toyama_b",
+                subtitle: "え～、ないわ～",
+                rarity: 2,
+                image: "assets/images/todofu/toyama/toyama-b.png"
+            },
+            c: {
+                id: "toyama_c",
+                subtitle: "狙います！",
+                rarity: 3,
+                image: "assets/images/todofu/toyama/toyama-c.png"
+            },
+            d: {
+                id: "toyama_d",
+                subtitle: "いい色だなぁ",
+                rarity: 4,
+                image: "assets/images/todofu/toyama/toyama-d.png"
             }
         }
     },
