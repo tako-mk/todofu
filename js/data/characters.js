@@ -65,14 +65,14 @@ export const characters = {
             d: {
                 id: "aomori_d",
                 subtitle: "ヘルプミー！！！",
-                rarity: 3,
+                rarity: 4,
                 image: "assets/images/todofu/aomori/aomori-d.png"
             },
             e: {
                 id: "aomori_e",
                 subtitle: "特殊なファンサ",
                 rarity: 4,
-                image: "assets/images/todofu/hokkaido/hokkaido-e.png"
+                image: "assets/images/todofu/aomori/aomori-e.png"
             }
         }
     },
@@ -100,14 +100,14 @@ export const characters = {
             d: {
                 id: "akita_d",
                 subtitle: "たまには休息も大事",
-                rarity: 3,
+                rarity: 4,
                 image: "assets/images/todofu/akita/akita-d.png"
             },
             e: {
-                id: "aomori_e",
+                id: "akita_e",
                 subtitle: "おつかれあきたいぬ",
                 rarity: 4,
-                image: "assets/images/todofu/hokkaido/hokkaido-e.png"
+                image: "assets/images/todofu/akita/akita-e.png"
             }
         }
     },
@@ -135,7 +135,7 @@ export const characters = {
             d: {
                 id: "iwate_d",
                 subtitle: "隠れたおさかな",
-                rarity: 3,
+                rarity: 4,
                 image: "assets/images/todofu/iwate/iwate-d.png"
             },
             e: {
@@ -170,7 +170,7 @@ export const characters = {
             d: {
                 id: "yamagata_d",
                 subtitle: "辛口なヘアスタイル",
-                rarity: 3,
+                rarity: 4,
                 image: "assets/images/todofu/yamagata/yamagata-d.png"
             },
             e: {
@@ -227,39 +227,465 @@ export const characters = {
         characters: {
             a: {
                 id: "fukushima_a",
-                subtitle: "わたしはサムライ",
+                subtitle: "あかべぇ",
                 rarity: 1,
                 image: "assets/images/todofu/fukushima/fukushima-a.png"
             },
             b: {
                 id: "fukushima_b",
-                subtitle: "このビッグウェーブに",
+                subtitle: "どういうこと？",
                 rarity: 2,
                 image: "assets/images/todofu/fukushima/fukushima-b.png"
             },
             c: {
                 id: "fukushima_c",
-                subtitle: "しょんぼり反省会",
+                subtitle: "気になるお年頃",
                 rarity: 3,
                 image: "assets/images/todofu/fukushima/fukushima-c.png"
             },
             d: {
                 id: "fukushima_d",
-                subtitle: "好き嫌いくらい誰にでも",
-                rarity: 3,
+                subtitle: "全力待機勢",
+                rarity: 4,
                 image: "assets/images/todofu/fukushima/fukushima-d.png"
             },
             e: {
                 id: "fukushima_e",
-                subtitle: "いつだって見てるよ",
+                subtitle: "了解しました！！",
                 rarity: 4,
                 image: "assets/images/todofu/fukushima/fukushima-e.png"
+            }
+        }
+    },
+    tochigi: {
+        name: "栃木県",
+        characters: {
+            a: {
+                id: "tochigi_a",
+                subtitle: "餃子うまうま",
+                rarity: 1,
+                image: "assets/images/todofu/tochigi/tochigi-a.png"
+            },
+            b: {
+                id: "tochigi_b",
+                subtitle: "いわざる",
+                rarity: 2,
+                image: "assets/images/todofu/tochigi/tochigi-b.png"
+            },
+            c: {
+                id: "tochigi_c",
+                subtitle: "きかざる",
+                rarity: 3,
+                image: "assets/images/todofu/tochigi/tochigi-c.png"
+            },
+            d: {
+                id: "tochigi_d",
+                subtitle: "みざる",
+                rarity: 4,
+                image: "assets/images/todofu/tochigi/tochigi-d.png"
+            },
+            e: {
+                id: "tochigi_e",
+                subtitle: "どうしよう…",
+                rarity: 4,
+                image: "assets/images/todofu/tochigi/tochigi-e.png"
+            }
+        }
+    },
+    ibaraki: {
+        name: "茨城県",
+        characters: {
+            a: {
+                id: "ibaraki_a",
+                subtitle: "栗のネックレス",
+                rarity: 1,
+                image: "assets/images/todofu/ibaraki/ibaraki-a.png"
+            },
+            b: {
+                id: "ibaraki_b",
+                subtitle: "ちょっと分けてよ",
+                rarity: 2,
+                image: "assets/images/todofu/ibaraki/ibaraki-b.png"
+            },
+            c: {
+                id: "ibaraki_c",
+                subtitle: "とげとげボール",
+                rarity: 3,
+                image: "assets/images/todofu/ibaraki/ibaraki-c.png"
+            },
+            d: {
+                id: "ibaraki_d",
+                subtitle: "怠惰な一面",
+                rarity: 3,
+                image: "assets/images/todofu/ibaraki/ibaraki-d.png"
+            },
+            e: {
+                id: "ibaraki_e",
+                subtitle: "ピーマンはお好き？",
+                rarity: 4,
+                image: "assets/images/todofu/ibaraki/ibaraki-e.png"
             },
             f: {
-                id: "fukushima_f",
-                subtitle: "お疲れタン！？",
+                id: "ibaraki_f",
+                subtitle: "激おこぷんぷん丸",
                 rarity: 4,
-                image: "assets/images/todofu/fukushima/fukushima-e.png"
+                image: "assets/images/todofu/ibaraki/ibaraki-f.png"
+            },
+            g: {
+                id: "ibaraki_g",
+                subtitle: "あきらめるな！",
+                rarity: 4,
+                image: "assets/images/todofu/ibaraki/ibaraki-g.png"
+            }
+        }
+    },
+    chiba: {
+        name: "千葉県",
+        characters: {
+            a: {
+                id: "chiba_a",
+                subtitle: "I am chiba!",
+                rarity: 1,
+                image: "assets/images/todofu/chiba/chiba-a.png"
+            },
+            b: {
+                id: "chiba_b",
+                subtitle: "konnichiha!",
+                rarity: 2,
+                image: "assets/images/todofu/chiba/chiba-b.png"
+            },
+            c: {
+                id: "chiba_c",
+                subtitle: "Are you ok?",
+                rarity: 3,
+                image: "assets/images/todofu/chiba/chiba-c.png"
+            },
+            d: {
+                id: "chiba_d",
+                subtitle: "Do you kotoyanen",
+                rarity: 4,
+                image: "assets/images/todofu/chiba/chiba-d.png"
+            },
+            e: {
+                id: "chiba_e",
+                subtitle: "Donmai",
+                rarity: 4,
+                image: "assets/images/todofu/chiba/chiba-e.png"
+            }
+        }
+    },
+    gunma: {
+        name: "群馬県",
+        characters: {
+            a: {
+                id: "gunma_a",
+                subtitle: "キューティーだるま",
+                rarity: 1,
+                image: "assets/images/todofu/gunma/gunma-a.png"
+            },
+            b: {
+                id: "gunma_b",
+                subtitle: "ゆっくりいきましょ",
+                rarity: 2,
+                image: "assets/images/todofu/gunma/gunma-b.png"
+            },
+            c: {
+                id: "gunma_c",
+                subtitle: "のぼせちゃった？",
+                rarity: 3,
+                image: "assets/images/todofu/gunma/gunma-c.png"
+            },
+            d: {
+                id: "gunma_d",
+                subtitle: "草津は日本一の湯",
+                rarity: 3,
+                image: "assets/images/todofu/gunma/gunma-d.png"
+            },
+            e: {
+                id: "gunma_e",
+                subtitle: "バカにするな！",
+                rarity: 4,
+                image: "assets/images/todofu/gunma/gunma-e.png"
+            },
+            f: {
+                id: "gunma_f",
+                subtitle: "ご機嫌な背中",
+                rarity: 4,
+                image: "assets/images/todofu/gunma/gunma-f.png"
+            },
+            g: {
+                id: "gunma_g",
+                subtitle: "こんにゃくぱくっ",
+                rarity: 4,
+                image: "assets/images/todofu/gunma/gunma-g.png"
+            }
+        }
+    },
+    saitama: {
+        name: "埼玉県",
+        characters: {
+            a: {
+                id: "saitama_a",
+                subtitle: "ビシッと決めて",
+                rarity: 1,
+                image: "assets/images/todofu/saitama/saitama-a.png"
+            },
+            b: {
+                id: "saitama_b",
+                subtitle: "お大事にしてください！",
+                rarity: 2,
+                image: "assets/images/todofu/saitama/saitama-b.png"
+            },
+            c: {
+                id: "saitama_c",
+                subtitle: "激しく同意",
+                rarity: 3,
+                image: "assets/images/todofu/saitama/saitama-c.png"
+            },
+            d: {
+                id: "saitama_d",
+                subtitle: "推し活にお熱",
+                rarity: 4,
+                image: "assets/images/todofu/saitama/saitama-d.png"
+            },
+            e: {
+                id: "saitama_e",
+                subtitle: "限界ヲタ活",
+                rarity: 4,
+                image: "assets/images/todofu/saitama/saitama-e.png"
+            }
+        }
+    },
+    tokyo: {
+        name: "東京都",
+        characters: {
+            a: {
+                id: "tokyo_a",
+                subtitle: "我らが首都東京",
+                rarity: 1,
+                image: "assets/images/todofu/tokyo/tokyo-a.png"
+            },
+            b: {
+                id: "tokyo_b",
+                subtitle: "おつかれさま！",
+                rarity: 2,
+                image: "assets/images/todofu/tokyo/tokyo-b.png"
+            },
+            c: {
+                id: "tokyo_c",
+                subtitle: "終電逃しちゃった",
+                rarity: 3,
+                image: "assets/images/todofu/tokyo/tokyo-c.png"
+            },
+            d: {
+                id: "tokyo_d",
+                subtitle: "残業続きの日々",
+                rarity: 4,
+                image: "assets/images/todofu/tokyo/tokyo-d.png"
+            },
+            e: {
+                id: "tokyo_e",
+                subtitle: "今日はおやすみ",
+                rarity: 4,
+                image: "assets/images/todofu/tokyo/tokyo-e.png"
+            }
+        }
+    },
+    kanagawa: {
+        name: "神奈川県",
+        characters: {
+            a: {
+                id: "kanagawa_a",
+                subtitle: "お似合いセーラー服",
+                rarity: 1,
+                image: "assets/images/todofu/kanagawa/kanagawa-a.png"
+            },
+            b: {
+                id: "kanagawa_b",
+                subtitle: "いますぐ駆けつける！",
+                rarity: 2,
+                image: "assets/images/todofu/kanagawa/kanagawa-b.png"
+            },
+            c: {
+                id: "kanagawa_c",
+                subtitle: "ふーん、そうなんだ",
+                rarity: 3,
+                image: "assets/images/todofu/kanagawa/kanagawa-c.png"
+            },
+            d: {
+                id: "kanagawa_d",
+                subtitle: "ちゃんと見てますよ",
+                rarity: 4,
+                image: "assets/images/todofu/kanagawa/kanagawa-d.png"
+            },
+            e: {
+                id: "kanagawa_e",
+                subtitle: "うおー！",
+                rarity: 4,
+                image: "assets/images/todofu/kanagawa/kanagawa-e.png"
+            }
+        }
+    },
+    aichi: {
+        name: "愛知県",
+        characters: {
+            a: {
+                id: "aichi_a",
+                subtitle: "立派なしゃちほこ",
+                rarity: 1,
+                image: "assets/images/todofu/aichi/aichi-a.png"
+            },
+            b: {
+                id: "aichi_b",
+                subtitle: "どうぞどうぞ",
+                rarity: 2,
+                image: "assets/images/todofu/aichi/aichi-b.png"
+            },
+            c: {
+                id: "aichi_c",
+                subtitle: "どういうこと？",
+                rarity: 3,
+                image: "assets/images/todofu/aichi/aichi-c.png"
+            },
+            d: {
+                id: "aichi_d",
+                subtitle: "もうダメだぁ…",
+                rarity: 4,
+                image: "assets/images/todofu/aichi/aichi-d.png"
+            },
+            e: {
+                id: "aichi_e",
+                subtitle: "世界のクルマ",
+                rarity: 4,
+                image: "assets/images/todofu/aichi/aichi-e.png"
+            }
+        }
+    },
+    gifu: {
+        name: "岐阜県",
+        characters: {
+            a: {
+                id: "gifu_a",
+                subtitle: "ぎふがあらわれた！",
+                rarity: 1,
+                image: "assets/images/todofu/gifu/gifu-a.png"
+            },
+            b: {
+                id: "gifu_b",
+                subtitle: "自慢の鮎",
+                rarity: 2,
+                image: "assets/images/todofu/gifu/gifu-b.png"
+            },
+            c: {
+                id: "gifu_c",
+                subtitle: "自信満々",
+                rarity: 3,
+                image: "assets/images/todofu/gifu/gifu-c.png"
+            },
+            d: {
+                id: "gifu_d",
+                subtitle: "温泉で一休み",
+                rarity: 4,
+                image: "assets/images/todofu/gifu/gifu-d.png"
+            },
+            e: {
+                id: "gifu_e",
+                subtitle: "しあわせ太り",
+                rarity: 4,
+                image: "assets/images/todofu/gifu/gifu-e.png"
+            }
+        }
+    },
+    yamanashi: {
+        name: "山梨県",
+        characters: {
+            a: {
+                id: "yamanashi_a",
+                subtitle: "果実の王国",
+                rarity: 1,
+                image: "assets/images/todofu/yamanashi/yamanashi-a.png"
+            },
+            b: {
+                id: "yamanashi_b",
+                subtitle: "飛んでいきます",
+                rarity: 2,
+                image: "assets/images/todofu/yamanashi/yamanashi-b.png"
+            },
+            c: {
+                id: "yamanashi_c",
+                subtitle: "一杯どうかな",
+                rarity: 3,
+                image: "assets/images/todofu/yamanashi/yamanashi-c.png"
+            },
+            d: {
+                id: "yamanashi_d",
+                subtitle: "ちょっと待った",
+                rarity: 4,
+                image: "assets/images/todofu/yamanashi/yamanashi-d.png"
+            }
+        }
+    },
+    niigata: {
+        name: "新潟県",
+        characters: {
+            a: {
+                id: "niigata_a",
+                subtitle: "たからものの笠",
+                rarity: 1,
+                image: "assets/images/todofu/niigata/niigata-a.png"
+            },
+            b: {
+                id: "niigata_b",
+                subtitle: "ぼくにまかせて",
+                rarity: 2,
+                image: "assets/images/todofu/niigata/niigata-b.png"
+            },
+            c: {
+                id: "niigata_c",
+                subtitle: "うまく行かない日",
+                rarity: 3,
+                image: "assets/images/todofu/niigata/niigata-c.png"
+            },
+            d: {
+                id: "niigata_d",
+                subtitle: "おやつのじかん",
+                rarity: 4,
+                image: "assets/images/todofu/niigata/niigata-d.png"
+            }
+        }
+    },
+    shizuoka: {
+        name: "静岡県",
+        characters: {
+            a: {
+                id: "shizuoka_a",
+                subtitle: "ようこそしずおかへ",
+                rarity: 1,
+                image: "assets/images/todofu/shizuoka/shizuoka-a.png"
+            },
+            b: {
+                id: "shizuoka_b",
+                subtitle: "こらえきれない笑い",
+                rarity: 2,
+                image: "assets/images/todofu/shizuoka/shizuoka-b.png"
+            },
+            c: {
+                id: "shizuoka_c",
+                subtitle: "しずおかのお茶",
+                rarity: 3,
+                image: "assets/images/todofu/shizuoka/shizuoka-c.png"
+            },
+            d: {
+                id: "shizuoka_d",
+                subtitle: "温泉で一休み",
+                rarity: 4,
+                image: "assets/images/todofu/shizuoka/shizuoka-d.png"
+            },
+            e: {
+                id: "shizuoka_e",
+                subtitle: "しあわせ太り",
+                rarity: 4,
+                image: "assets/images/todofu/shizuoka/shizuoka-e.png"
             }
         }
     },
