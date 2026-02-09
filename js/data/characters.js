@@ -671,21 +671,56 @@ export const characters = {
             },
             c: {
                 id: "shizuoka_c",
-                subtitle: "しずおかのお茶",
+                subtitle: "しずおかのお茶は世界一",
                 rarity: 3,
                 image: "assets/images/todofu/shizuoka/shizuoka-c.png"
             },
             d: {
                 id: "shizuoka_d",
-                subtitle: "温泉で一休み",
+                subtitle: "サッカー王国だった",
                 rarity: 4,
                 image: "assets/images/todofu/shizuoka/shizuoka-d.png"
             },
             e: {
                 id: "shizuoka_e",
-                subtitle: "しあわせ太り",
+                subtitle: "ごめんなさい",
                 rarity: 4,
                 image: "assets/images/todofu/shizuoka/shizuoka-e.png"
+            }
+        }
+    },
+    ishikawa: {
+        name: "石川県",
+        characters: {
+            a: {
+                id: "ishikawa_a",
+                subtitle: "輪島塗に入り込んで",
+                rarity: 1,
+                image: "assets/images/todofu/ishikawa/ishikawa-a.png"
+            },
+            b: {
+                id: "ishikawa_b",
+                subtitle: "え～、ないわ～",
+                rarity: 2,
+                image: "assets/images/todofu/ishikawa/ishikawa-b.png"
+            },
+            c: {
+                id: "ishikawa_c",
+                subtitle: "狙います！",
+                rarity: 3,
+                image: "assets/images/todofu/ishikawa/ishikawa-c.png"
+            },
+            d: {
+                id: "ishikawa_d",
+                subtitle: "いい色だなぁ",
+                rarity: 4,
+                image: "assets/images/todofu/ishikawa/ishikawa-d.png"
+            },
+            e: {
+                id: "ishikawa_e",
+                subtitle: "どやぁ",
+                rarity: 4,
+                image: "assets/images/todofu/ishikawa/ishikawa-e.png"
             }
         }
     },
