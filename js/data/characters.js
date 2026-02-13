@@ -1644,5 +1644,5 @@ export const characters = {
                 image: "assets/images/todofu/okinawa/okinawa-e.png"
             }
         }
-    },
+    }
 };
