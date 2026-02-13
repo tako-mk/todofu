@@ -1506,7 +1506,7 @@ export const characters = {
         }
     },
     saga: {
-        name: "鹿児島県",
+        name: "佐賀県",
         characters: {
             a: {
                 id: "saga_a",
@@ -1537,6 +1537,111 @@ export const characters = {
                 subtitle: "影薄くないもん！",
                 rarity: 4,
                 image: "assets/images/todofu/saga/saga-e.png"
+            }
+        }
+    },
+    kumamoto: {
+        name: "熊本県",
+        characters: {
+            a: {
+                id: "kumamoto_a",
+                subtitle: "実は熊はいない",
+                rarity: 1,
+                image: "assets/images/todofu/kumamoto/kumamoto-a.png"
+            },
+            b: {
+                id: "kumamoto_b",
+                subtitle: "高級馬刺し",
+                rarity: 2,
+                image: "assets/images/todofu/kumamoto/kumamoto-b.png"
+            },
+            c: {
+                id: "kumamoto_c",
+                subtitle: "そっけない態度",
+                rarity: 3,
+                image: "assets/images/todofu/kumamoto/kumamoto-c.png"
+            },
+            d: {
+                id: "kumamoto_d",
+                subtitle: "火山のふもと",
+                rarity: 4,
+                image: "assets/images/todofu/kumamoto/kumamoto-d.png"
+            },
+            e: {
+                id: "kumamoto_e",
+                subtitle: "カルデラ湖で",
+                rarity: 4,
+                image: "assets/images/todofu/kumamoto/kumamoto-e.png"
+            }
+        }
+    },
+    miyazaki: {
+        name: "宮崎県",
+        characters: {
+            a: {
+                id: "miyazaki_a",
+                subtitle: "マンゴーだけじゃない",
+                rarity: 1,
+                image: "assets/images/todofu/miyazaki/miyazaki-a.png"
+            },
+            b: {
+                id: "miyazaki_b",
+                subtitle: "なんでなん",
+                rarity: 2,
+                image: "assets/images/todofu/miyazaki/miyazaki-b.png"
+            },
+            c: {
+                id: "miyazaki_c",
+                subtitle: "おだてられた",
+                rarity: 3,
+                image: "assets/images/todofu/miyazaki/miyazaki-c.png"
+            },
+            d: {
+                id: "miyazaki_d",
+                subtitle: "なにいってんの？",
+                rarity: 4,
+                image: "assets/images/todofu/miyazaki/miyazaki-d.png"
+            },
+            e: {
+                id: "miyazaki_e",
+                subtitle: "どうしよっかなー",
+                rarity: 4,
+                image: "assets/images/todofu/miyazaki/miyazaki-e.png"
+            }
+        }
+    },
+    okinawa: {
+        name: "沖縄県",
+        characters: {
+            a: {
+                id: "okinawa_a",
+                subtitle: "琉球王国",
+                rarity: 1,
+                image: "assets/images/todofu/okinawa/okinawa-a.png"
+            },
+            b: {
+                id: "okinawa_b",
+                subtitle: "南国のビーチで",
+                rarity: 2,
+                image: "assets/images/todofu/okinawa/okinawa-b.png"
+            },
+            c: {
+                id: "okinawa_c",
+                subtitle: "飲んでます",
+                rarity: 3,
+                image: "assets/images/todofu/okinawa/okinawa-c.png"
+            },
+            d: {
+                id: "okinawa_d",
+                subtitle: "まぶしすぎる！",
+                rarity: 4,
+                image: "assets/images/todofu/okinawa/okinawa-d.png"
+            },
+            e: {
+                id: "okinawa_e",
+                subtitle: "水分補給は大事",
+                rarity: 4,
+                image: "assets/images/todofu/okinawa/okinawa-e.png"
             }
         }
     },
