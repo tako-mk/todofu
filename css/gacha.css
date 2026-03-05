@@ -1,0 +1,239 @@
+/* ==============================
+   Gacha Screen UI
+============================== */
+
+#gacha-screen {
+    position: absolute;
+    inset: 0;
+    display: none;
+    /* 初期は非表示。flexで表示する */
+    flex-direction: column;
+    background: #fdfbf7;
+    /* ホーム画面に近い明るい背景色 */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.gacha-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.gacha-diamond-display {
+    font-size: 28px;
+    font-weight: bold;
+    background: rgba(255, 255, 255, 0.8);
+    padding: 10px 24px;
+    border-radius: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #444;
+}
+
+.back-button {
+    padding: 10px 24px;
+    font-size: 24px;
+    font-weight: bold;
+    background: #fff;
+    border: 2px solid #ddd;
+    border-radius: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 0 #ccc;
+    color: #555;
+    transition: 0.1s;
+}
+
+.back-button:active {
+    transform: translateY(4px);
+    box-shadow: none;
+}
+
+.gacha-content-wrapper {
+    display: flex;
+    flex: 1;
+    gap: 20px;
+}
+
+/* 左側のリストの親コンテナ（もうボタンは入っていないが、レイアウト統一のため残す） */
+.gacha-left-panel {
+    width: 280px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 左側のガチャリストエリア */
+.gacha-list-area {
+    display: flex;
+    flex: 1;
+    /* リスト部分を伸ばす */
+    flex-direction: column;
+    gap: 16px;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.gacha-list-item {
+    padding: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    border: none;
+    border-radius: 16px;
+    background: linear-gradient(#fff, #f0f0f0);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 4px 0 #d0d0d0;
+    cursor: pointer;
+    transition: 0.1s;
+    text-align: left;
+    color: #444;
+}
+
+.gacha-list-item:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 transparent;
+}
+
+.gacha-list-item.active {
+    background: linear-gradient(#fffff6, #ffefc4);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1), 0 4px 0 #dbceb6;
+    color: #000;
+}
+
+/* ==============================
+   左下の操作エリア
+============================== */
+.gacha-action-area {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.gacha-info-btn {
+    padding: 12px;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    background: #e0e0e0;
+    box-shadow: 0 4px 0 #b0b0b0;
+    color: #555;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+.gacha-info-btn:active {
+    transform: translateY(4px);
+    box-shadow: none;
+}
+
+.gacha-draw-buttons {
+    display: flex;
+    gap: 12px;
+}
+
+.gacha-draw-btn {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 0;
+    font-weight: bold;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: 0.1s;
+    color: #fff;
+    text-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+}
+
+.draw-title {
+    font-size: 22px;
+    margin-bottom: 4px;
+}
+
+.draw-cost {
+    font-size: 18px;
+    color: #ffefc4;
+}
+
+/* 右側に配置された horizontal 版のボタン配置レイアウト */
+.gacha-action-area.horizontal {
+    flex-direction: row;
+    /* 横並びに変更 */
+    align-items: stretch;
+    /* 高さも揃える */
+    gap: 16px;
+}
+
+.gacha-action-area.horizontal .gacha-info-btn {
+    flex: 1;
+    /* 提供割合ボタンを1つめのブロックとして伸ばす */
+    margin: 0;
+}
+
+.gacha-action-area.horizontal .gacha-draw-buttons {
+    flex: 3;
+    /* ガチャ引くボタン部分を広く取る（割合は調整可能） */
+}
+
+/* 1回引くボタン：青系 */
+.gacha-draw-btn.draw-single {
+    background: linear-gradient(#6eb2ff, #438af0);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 4px 0 #2a6bcc;
+}
+
+/* 10回引くボタン：オレンジ・赤系 */
+.gacha-draw-btn.draw-multi {
+    background: linear-gradient(#ff8c42, #f55536);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 4px 0 #cc3d22;
+}
+
+.gacha-draw-btn:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 transparent;
+}
+
+/* ==============================
+   右側のパネル（画像と操作ボタン用）
+============================== */
+.gacha-right-panel {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-height: 100%;
+}
+
+/* 右側のガチャプレビューエリア */
+.gacha-preview-area {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+    border-radius: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 4px solid #fff;
+    overflow: hidden;
+}
+
+.gacha-placeholder-text {
+    font-size: 36px;
+    font-weight: bold;
+    color: rgba(0, 0, 0, 0.4);
+    background: rgba(255, 255, 255, 0.5);
+    padding: 20px 40px;
+    border-radius: 20px;
+}
+
+#gacha-preview-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    /* 16:9の枠内で画像が一切見切れないようにcontainを使う */
+    display: none;
+    /* 初期は非表示 */
+}

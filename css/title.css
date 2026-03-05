@@ -1,0 +1,36 @@
+/* ==============================
+   Title Screen
+============================== */
+
+#title-screen {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: url("../assets/images/title.png") center / contain no-repeat;
+}
+
+.tap {
+    position: absolute;
+    left: 13%;
+    bottom: 20%;
+
+    font-family: "Lucida Sans Unicode", system-ui, sans-serif;
+    font-size: 60px;
+    color: #fff;
+    text-shadow: 2px 2px 0 #000;
+
+    opacity: 0.8;
+    animation: blink 1.5s infinite;
+}
+
+.credit {
+    position: absolute;
+    right: 3%;
+    bottom: 4%;
+
+    font-family: "Lucida Sans Unicode", system-ui, sans-serif;
+    font-size: 30px;
+    opacity: 0.6;
+}

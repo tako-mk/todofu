@@ -1,0 +1,26 @@
+/* ==============================
+   Reset & Base
+============================== */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+    background: #fff;
+    overflow: hidden;
+    font-family: 'M PLUS Rounded 1c', 'Mochiy Pop P One', 'HGS創英角ﾎﾟｯﾌﾟ体', 'HGP創英角ﾎﾟｯﾌﾟ体', 'HGS Soei Kakupoptai', system-ui, sans-serif;
+}
+
+/* ボタン等でもフォントを継承させる（デフォルトだとシステムフォントになってしまうため） */
+button,
+input,
+select,
+textarea {
+    font-family: inherit;
+}

@@ -6,6 +6,7 @@
 import { initTitle, hideTitle } from "./scenes/title.js";
 import { startLoading, hideLoading } from "./scenes/loading.js";
 import { initHome } from "./scenes/home.js";
+import { initGacha } from "./scenes/gacha.js";
 
 // ゲーム開始済みフラグ（多重起動防止）
 let started = false;
@@ -31,17 +32,20 @@ function resizeGame() {
 const titleScreen = document.getElementById("title-screen");
 const loadingScreen = document.getElementById("loading-screen");
 const homeScreen = document.getElementById("home-screen");
+const gachaScreen = document.getElementById("gacha-screen");
 
 function showScreen(name) {
     // 全部一旦非表示
     titleScreen.style.display = "none";
     loadingScreen.classList.remove("active");
     homeScreen.style.display = "none";
+    if (gachaScreen) gachaScreen.style.display = "none";
 
     // 指定画面だけ表示
     if (name === "title") titleScreen.style.display = "flex";
     if (name === "loading") loadingScreen.classList.add("active");
     if (name === "home") homeScreen.style.display = "flex";
+    if (name === "gacha") gachaScreen.style.display = "flex";
 }
 
 /**
@@ -80,11 +84,24 @@ function startGame() {
     // initGame();
 }
 
+/**
+ * 汎用的なローディング遷移関数
+ */
+function transitionTo(targetScreen, loadTime = 2000) {
+    showScreen("loading");
+    startLoading();
+
+    setTimeout(() => {
+        hideLoading();
+        showScreen(targetScreen);
+    }, loadTime);
+}
+
 // リサイズ時にスケーリングを更新
 window.addEventListener("resize", resizeGame);
 resizeGame();
 
-// 入力受付
+// イベントリスナーの登録
 document.addEventListener("keydown", (e) => {
     if (e.repeat) return;
     if (e.code === "Enter" || e.code === "Space") {
@@ -93,6 +110,23 @@ document.addEventListener("keydown", (e) => {
 });
 titleScreen.addEventListener("pointerdown", startFlow);
 
+// ガチャボタン
+const btnGacha = document.getElementById("btn-gacha");
+if (btnGacha) {
+    btnGacha.addEventListener("pointerdown", () => {
+        transitionTo("gacha", 1500); // 1.5秒ローディングしてガチャ画面へ
+    });
+}
+
+// ガチャ画面から戻る
+const btnGachaBack = document.getElementById("btn-gacha-back");
+if (btnGachaBack) {
+    btnGachaBack.addEventListener("pointerdown", () => {
+        transitionTo("home", 1000); // 1.0秒ローディングしてホーム画面へ
+    });
+}
+
 // タイトル初期化
 showScreen("title");
 initTitle();
+initGacha();

@@ -1,5 +1,4 @@
 const loading = document.getElementById("loading-screen");
-const loadingText = loading.querySelector(".loading-text");
 const tipsText = loading.querySelector(".tips-text");
 
 const tips = [
@@ -9,28 +8,26 @@ const tips = [
     "各とどーふの特徴を理解しよう！"
 ];
 
-let dot = 1;
-let dotTimer = null;
 let tipsTimer = null;
 
 export function startLoading() {
     loading.classList.add("active");
 
-    loadingText.textContent = "Now loading.";
+    // 重複をさけるため前回と同じものは選ばないようにする
+    let prevIndex = Math.floor(Math.random() * tips.length);
+    tipsText.textContent = tips[prevIndex];
 
-    dotTimer = setInterval(() => {
-        dot = dot % 3 + 1;
-        loadingText.textContent = "Now loading" + ".".repeat(dot);
-    }, 500);
-
-    tipsText.textContent = tips[0];
-    let i = 0;
     tipsTimer = setInterval(() => {
         tipsText.style.opacity = 0;
 
         setTimeout(() => {
-            i = (i + 1) % tips.length;
-            tipsText.textContent = tips[i];
+            let nextIndex;
+            do {
+                nextIndex = Math.floor(Math.random() * tips.length);
+            } while (nextIndex === prevIndex && tips.length > 1);
+
+            prevIndex = nextIndex;
+            tipsText.textContent = tips[nextIndex];
             tipsText.style.opacity = 1;
         }, 200);
 
@@ -40,6 +37,5 @@ export function startLoading() {
 
 export function hideLoading() {
     loading.classList.remove("active");
-    clearInterval(dotTimer);
     clearInterval(tipsTimer);
 }

@@ -1,56 +1,121 @@
 <!DOCTYPE html>
 <html lang="ja">
+
 <head>
     <meta charset="UTF-8">
     <title>とどーふ！</title>
 
-    <!-- フォント読み込み -->
-    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@700&display=swap" rel="stylesheet">
+    <!-- 英語・数字用の丸ゴシック（元のフォントから英数字だけを抽出） -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@700&text=ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789%20-.&display=swap"
+        rel="stylesheet">
+    <!-- 日本語用のポップ体フォント -->
+    <link href="https://fonts.googleapis.com/css2?family=Mochiy+Pop+P+One&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/title.css">
+    <link rel="stylesheet" href="css/loading.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/gacha.css">
+    <link rel="stylesheet" href="css/animation.css">
 </head>
+
 <body>
     <div id="viewport">
         <div id="game-root">
             <div id="game-screen">
 
-            <div id="title-screen">
-                <p class="tap">TAP TO START</p>
-                <p class="credit">Produced by tako-mk</p>
-            </div>
-
-            <div id="loading-screen">
-                <p class="loading-text">Now loading.</p>
-                <div class="tips-box">
-                    <div class="tips-title">TIPS</div>
-                    <div class="tips-text"></div>
-                </div>
-            </div>
-
-            <div id="home-screen">
-                <div class="top-bar">
-                    <div class="money">💰 1200</div>
-                    <div class="diamond">💎 35</div>
+                <div id="title-screen">
+                    <p class="tap">TAP TO START</p>
+                    <p class="credit">Produced by tako-mk</p>
                 </div>
 
-                <div class="main-area">
-                    <img class="player-character" class="player-character" alt="player">
-                </div>
-
-                <div class="bottom-bar">
-                    <div class="event-area">
-                        <div class="event-title">イベント</div>
-                        <div class="event-text">限定ガチャ開催中！</div>
+                <div id="loading-screen">
+                    <div class="loader">
+                        <div class="text">
+                            <span>L</span>
+                            <span>O</span>
+                            <span>A</span>
+                            <span>D</span>
+                            <span>I</span>
+                            <span>N</span>
+                            <span>G</span>
+                        </div>
+                        <div class="underline"></div>
                     </div>
-
-                    <div class="menu-bar">
-                        <button class="menu-item">ガチャ</button>
-                        <button class="menu-item">とどーふ</button>
-                        <button class="menu-item">ミッション</button>
-                        <button class="menu-item">合戦</button>
+                    <div class="tips-box">
+                        <div class="tips-title">TIPS</div>
+                        <div class="tips-text"></div>
                     </div>
                 </div>
-            </div>
+
+                <div id="home-screen">
+                    <div class="top-bar">
+                        <div class="money">💰 1200</div>
+                        <div class="diamond">💎 35</div>
+                    </div>
+
+                    <div class="main-area">
+                        <img class="player-character" class="player-character" alt="player">
+                    </div>
+
+                    <div class="bottom-bar">
+                        <div class="event-area">
+                            <div class="event-title">イベント</div>
+                            <div class="event-text">限定ガチャ開催中！</div>
+                        </div>
+
+                        <div class="menu-bar">
+                            <button id="btn-gacha" class="menu-item">ガチャ</button>
+                            <button class="menu-item">とどーふ</button>
+                            <button class="menu-item">ミッション</button>
+                            <button class="menu-item">合戦</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="gacha-screen">
+                    <div class="gacha-header">
+                        <button id="btn-gacha-back" class="back-button">◀ もどる</button>
+                        <div class="gacha-diamond-display">💎 35</div>
+                    </div>
+                    <div class="gacha-content-wrapper">
+                        <!-- 左側のパネル（リスト＋操作ボタン） -->
+                        <div class="gacha-left-panel">
+                            <!-- 左側のリスト -->
+                            <div class="gacha-list-area">
+                                <button class="gacha-list-item active">ピックアップガチャ</button>
+                                <button class="gacha-list-item">ノーマルガチャ</button>
+                                <button class="gacha-list-item">イベントガチャ</button>
+                            </div>
+                        </div><!-- end of gacha-left-panel -->
+
+                        <!-- 右側のパネル（画像 ＋ 操作ボタン） -->
+                        <div class="gacha-right-panel">
+                            <!-- 右側のプレビュー（仮色または画像） -->
+                            <div class="gacha-preview-area">
+                                <img id="gacha-preview-img" src="" alt="ガチャ画像">
+                                <div id="gacha-placeholder-text" class="gacha-placeholder-text">ピックアップガチャ（未作成）</div>
+                            </div>
+
+                            <!-- 右側下部のガチャ操作エリア -->
+                            <div class="gacha-action-area horizontal">
+                                <button class="gacha-info-btn">提供割合</button>
+                                <div class="gacha-draw-buttons">
+                                    <button class="gacha-draw-btn draw-single">
+                                        <span class="draw-title">1回引く</span>
+                                        <span class="draw-cost">💎 3</span>
+                                    </button>
+                                    <button class="gacha-draw-btn draw-multi">
+                                        <span class="draw-title">10回引く</span>
+                                        <span class="draw-cost">💎 30</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div><!-- end of gacha-right-panel -->
+                    </div>
+                </div>
 
 
             </div>
@@ -62,4 +127,5 @@
 
     <script type="module" src="js/main.js"></script>
 </body>
+
 </html>

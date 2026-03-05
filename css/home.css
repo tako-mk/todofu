@@ -1,0 +1,135 @@
+/* ==============================
+   Home UI
+============================== */
+
+#home-screen {
+    position: absolute;
+    background: url("../assets/images/home-background.jpg") center / contain no-repeat;
+    inset: 0;
+    display: none;
+    flex-direction: column;
+}
+
+.top-bar {
+    height: 60px;
+    width: 50%;
+    /* 画面の半分程度の長さに変更 */
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    /* コインとダイヤを均等な間隔で配置 */
+    padding: 0 30px;
+    margin: 20px 0 0 20px;
+    /* 上と左に余白を設ける */
+    font-size: 26px;
+    background: rgba(255, 255, 255, 0.9);
+    /* 少し透けた白い背景 */
+    border-radius: 30px;
+    /* 両端を丸くしてバーの形にする */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    /* 軽い影をつける */
+    align-self: flex-start;
+}
+
+.main-area {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.player-character {
+    height: 60%;
+    animation: float 3s ease-in-out infinite;
+}
+
+.bottom-bar {
+    height: 150px;
+    display: flex;
+    justify-content: space-between;
+    /* 要素を両端に寄せる */
+    padding: 24px;
+    gap: 24px;
+}
+
+.event-area {
+    width: 20%;
+    /* 約1/5の幅に広げる */
+    background: rgba(255, 255, 255, 0.95);
+    /* 少しだけ透明感を出す */
+    border-radius: 20px;
+    padding: 16px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15), 0 -2px 0 rgba(0, 0, 0, 0.05) inset;
+    /* 浮いているような影と、立体感を出す内側の影 */
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    /* 縁を強調 */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.event-title {
+    font-size: 22px;
+    color: #ff5e5e;
+    margin-bottom: 8px;
+}
+
+.event-text {
+    font-size: 26px;
+}
+
+.menu-bar {
+    display: flex;
+    width: 800px;
+    height: 110px;
+    border-radius: 20px;
+    background: linear-gradient(#fffff6, #ffefc4);
+    /* クリーム色グラデーション */
+    overflow: hidden;
+    /* 従来の押し込み用の影（0 6px 0）に加えて、浮遊感のある影（0 10px 15px）を追加 */
+    box-shadow: 0 6px 0 #dbceb6, 0 10px 15px rgba(0, 0, 0, 0.2);
+    margin-bottom: 8px;
+    /* 影のためのスペースを確保し、画面端から少し浮かせる */
+    border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* 各メニュー */
+.menu-item {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background: transparent;
+    font-size: 28px;
+    cursor: pointer;
+    position: relative;
+    transition: 0.15s;
+}
+
+.menu-item:first-child {
+    border-left: none;
+}
+
+/* 縦区切り線 */
+.menu-item:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: 15%;
+    width: 2px;
+    height: 70%;
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.menu-item:hover {
+    background: rgba(255, 230, 160, 0.4);
+    transform: translateY(2px);
+}
+
+.menu-item:active {
+    background: rgba(255, 210, 100, 0.6);
+    transform: translateY(2px);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+}

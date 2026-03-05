@@ -1,0 +1,31 @@
+/* ==============================
+   Viewport & Scaling
+============================== */
+
+#viewport {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#game-root {
+    width: 1280px;
+    height: 720px;
+    position: relative;
+    transform-origin: center;
+}
+
+
+/* ==============================
+   Game Screen (16:9 Area)
+============================== */
+
+#game-screen {
+    position: relative;
+    width: 1280px;
+    height: 720px;
+    background: #ffffff;
+    overflow: hidden;
+}
