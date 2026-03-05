@@ -16,9 +16,10 @@
 
 .gacha-header {
     display: flex;
+    flex: 0 0 auto;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .gacha-diamond-display {
@@ -52,6 +53,7 @@
 .gacha-content-wrapper {
     display: flex;
     flex: 1;
+    min-height: 0;
     gap: 20px;
 }
 
@@ -111,7 +113,7 @@
 
 .gacha-info-btn {
     padding: 12px;
-    font-size: 20px;
+    font-size: 26px;
     font-weight: bold;
     border: none;
     border-radius: 12px;
@@ -135,9 +137,9 @@
 .gacha-draw-btn {
     flex: 1;
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
+    gap: 12px;
     padding: 12px 0;
     font-weight: bold;
     border: none;
@@ -149,12 +151,12 @@
 }
 
 .draw-title {
-    font-size: 22px;
-    margin-bottom: 4px;
+    font-size: 30px;
+    margin-bottom: 0;
 }
 
 .draw-cost {
-    font-size: 18px;
+    font-size: 26px;
     color: #ffefc4;
 }
 
@@ -165,6 +167,7 @@
     align-items: stretch;
     /* 高さも揃える */
     gap: 16px;
+    margin-top: auto;
 }
 
 .gacha-action-area.horizontal .gacha-info-btn {
@@ -202,12 +205,14 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 10px;
     max-height: 100%;
 }
 
 /* 右側のガチャプレビューエリア */
 .gacha-preview-area {
+    flex: 1;
+    min-height: 0;
     width: 100%;
     aspect-ratio: 16 / 9;
     background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
@@ -236,4 +241,138 @@
     /* 16:9の枠内で画像が一切見切れないようにcontainを使う */
     display: none;
     /* 初期は非表示 */
+}
+
+/* ==============================
+   提供割合モーダル
+============================== */
+
+.rate-modal {
+    position: absolute;
+    inset: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.45);
+}
+
+.rate-modal-content {
+    width: 600px;
+    max-height: 80%;
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0 12px 30px rgba(0,0,0,0.3);
+    display: flex;
+    flex-direction: column;
+}
+
+.rate-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 2px solid #eee;
+}
+
+.rate-modal-title {
+    font-size: 26px;
+    font-weight: bold;
+}
+
+.rate-close-btn {
+    font-size: 26px;
+    border: none;
+    background: none;
+    cursor: pointer;
+}
+
+.rate-modal-body {
+    padding: 20px;
+    overflow-y: auto;   /* ←スクロール */
+}
+
+.rate-subtitle {
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.rate-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 24px;
+}
+
+.rate-table td {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    font-size: 20px;
+}
+
+/* ============================== */
+/* ガチャ引く確認モーダル */
+/* ============================== */
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-content {
+    width: 320px;
+    background: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+}
+
+.modal-title {
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+.modal-text {
+    margin-bottom: 10px;
+}
+
+.modal-diamond {
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-cancel {
+    flex: 1;
+    padding: 10px;
+    background: #ddd;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 4px 0 #e0e0e0;
+}
+
+.btn-confirm {
+    flex: 1;
+    padding: 10px;
+    background: #39d353; /* 明るい緑 */
+    color: white;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 4px 0 #75c746;
+}
+
+.btn-cancel:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 transparent;
+}
+
+.btn-confirm:active {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 transparent;
 }

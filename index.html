@@ -57,7 +57,7 @@
                     </div>
 
                     <div class="main-area">
-                        <img class="player-character" class="player-character" alt="player">
+                        <img class="player-character" alt="player">
                     </div>
 
                     <div class="bottom-bar">
@@ -85,9 +85,9 @@
                         <div class="gacha-left-panel">
                             <!-- 左側のリスト -->
                             <div class="gacha-list-area">
-                                <button class="gacha-list-item active">ピックアップガチャ</button>
-                                <button class="gacha-list-item">ノーマルガチャ</button>
-                                <button class="gacha-list-item">イベントガチャ</button>
+                                <button class="gacha-list-item active" data-gacha="pickup">ピックアップガチャ</button>
+                                <button class="gacha-list-item" data-gacha="normal">ノーマルガチャ</button>
+                                <button class="gacha-list-item" data-gacha="event">イベントガチャ</button>
                             </div>
                         </div><!-- end of gacha-left-panel -->
 
@@ -103,17 +103,64 @@
                             <div class="gacha-action-area horizontal">
                                 <button class="gacha-info-btn">提供割合</button>
                                 <div class="gacha-draw-buttons">
-                                    <button class="gacha-draw-btn draw-single">
+                                    <button class="gacha-draw-btn draw-single" data-count="1">
                                         <span class="draw-title">1回引く</span>
-                                        <span class="draw-cost">💎 3</span>
+                                        <span class="draw-cost">💎 100</span>
                                     </button>
-                                    <button class="gacha-draw-btn draw-multi">
+                                    <button class="gacha-draw-btn draw-multi" data-count="10">
                                         <span class="draw-title">10回引く</span>
-                                        <span class="draw-cost">💎 30</span>
+                                        <span class="draw-cost">💎 1000</span>
                                     </button>
                                 </div>
                             </div>
                         </div><!-- end of gacha-right-panel -->
+
+                        <div id="gacha-rate-modal" class="rate-modal">
+                            <div class="rate-modal-content">
+
+                                <div class="rate-modal-header">
+                                    <div class="rate-modal-title">提供割合</div>
+                                    <button id="rate-close-btn" class="rate-close-btn">×</button>
+                                </div>
+
+                                <div class="rate-modal-body">
+
+                                    <h3 class="rate-subtitle">レアリティ別</h3>
+
+                                    <table class="rate-table">
+                                    </table>
+
+                                    <h3 class="rate-subtitle">とどーふ別</h3>
+
+                                    <table class="rate-table">
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="gacha-confirm-modal" class="modal">
+                            <div class="modal-content">
+
+                                <h2 class="modal-title">確認</h2>
+
+                                <p class="modal-text">
+                                    ダイヤを <span id="cost-before">100</span> 個消費して<br>
+                                    ガチャを引きますか？
+                                </p>
+
+                                <p class="modal-diamond">
+                                    <span id="diamond-before">500</span>個 → 
+                                    <span id="diamond-after">400</span>個
+                                </p>
+
+                                <div class="modal-buttons">
+                                    <button id="cancel-gacha" class="btn-cancel">やめる</button>
+                                    <button id="confirm-gacha" class="btn-confirm">引く</button>
+                                </div>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
 
