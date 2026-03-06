@@ -1,10 +1,10 @@
-// js/scenes/home.js
-import { characters } from "../data/characters.js";
+import { characters as characters_flat } from "../data/characters_flat.js";
 import { loadPlayerData } from "../data/save.js";
 
 export function initHome() {
     const data = loadPlayerData();
-    const char = characters[data.character];
+    const favId = data.profile ? data.profile.favoriteCharId : data.character;
+    const char = characters_flat[favId];
 
     const img = document.querySelector(".player-character");
     if (img && char) img.src = char.image;

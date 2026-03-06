@@ -7,6 +7,8 @@ import { initTitle, hideTitle } from "./scenes/title.js";
 import { startLoading, hideLoading } from "./scenes/loading.js";
 import { initHome } from "./scenes/home.js";
 import { initGacha } from "./scenes/gacha.js";
+import { initTodofu } from "./scenes/todofu.js";
+import { initSystemMenu } from "./scenes/system.js";
 
 // ゲーム開始済みフラグ（多重起動防止）
 let started = false;
@@ -33,6 +35,7 @@ const titleScreen = document.getElementById("title-screen");
 const loadingScreen = document.getElementById("loading-screen");
 const homeScreen = document.getElementById("home-screen");
 const gachaScreen = document.getElementById("gacha-screen");
+const todofuScreen = document.getElementById("todofu-screen");
 
 function showScreen(name) {
     // 全部一旦非表示
@@ -40,12 +43,14 @@ function showScreen(name) {
     loadingScreen.classList.remove("active");
     homeScreen.style.display = "none";
     if (gachaScreen) gachaScreen.style.display = "none";
+    if (todofuScreen) todofuScreen.style.display = "none";
 
     // 指定画面だけ表示
     if (name === "title") titleScreen.style.display = "flex";
     if (name === "loading") loadingScreen.classList.add("active");
     if (name === "home") homeScreen.style.display = "flex";
     if (name === "gacha") gachaScreen.style.display = "flex";
+    if (name === "todofu") todofuScreen.style.display = "flex";
 }
 
 /**
@@ -126,7 +131,22 @@ if (btnGachaBack) {
     });
 }
 
+// とどーふボタン
+const btnTodofu = document.getElementById("btn-todofu");
+if (btnTodofu) {
+    btnTodofu.addEventListener("pointerdown", () => {
+        transitionTo("todofu", 1800);
+    });
+}
+
+// とどーふ画面からの戻り（カスタムイベント）
+window.addEventListener("transition-to-home", () => {
+    transitionTo("home", 1000);
+});
+
 // タイトル初期化
 showScreen("title");
 initTitle();
 initGacha();
+initTodofu();
+initSystemMenu();

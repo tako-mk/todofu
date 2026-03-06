@@ -4,10 +4,32 @@ export function savePlayerData(data) {
 }
 
 export function loadPlayerData() {
-    return JSON.parse(localStorage.getItem("todofu_save")) || {
+    const defaultData = {
         character: "hokkaido_a",
         money: 1200,
         diamond: 5000,
-        collection: []
+        collection: [],
+        formations: [
+            [null, null, null, null, null],
+            [null, null, null, null, null],
+            [null, null, null, null, null],
+            [null, null, null, null, null],
+            [null, null, null, null, null]
+        ],
+        profile: {
+            name: "とどーふマスター",
+            comment: "日本全国制覇を目指しています！",
+            favoriteCharId: "hokkaido_a",
+            displayFormationIdx: 0
+        }
+    };
+
+    const saved = JSON.parse(localStorage.getItem("todofu_save"));
+    if (!saved) return defaultData;
+
+    // 既存のセーブデータがある場合、足りないキーを補完する
+    return {
+        ...defaultData,
+        ...saved
     };
 }

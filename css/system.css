@@ -1,0 +1,361 @@
+/* ==============================
+   System Menu & Profile
+   ============================== */
+
+/* 横三本線（ハンバーガー）ボタン - 右上に四角く配置 */
+.system-menu-btn {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.9);
+    border: none;
+    font-size: 32px;
+    color: #444;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    z-index: 100;
+}
+
+.system-menu-btn:hover {
+    transform: scale(1.05);
+    background: #fff;
+    color: #ff9100;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* モーダル共通オーバーレイ */
+.modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeInModal 0.3s ease-out;
+}
+
+/* キャラ選択モーダルなどの既存モーダルの最前面化 */
+.modal {
+    z-index: 300 !important;
+}
+
+@keyframes fadeInModal {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+/* システムメニュー内容 */
+.system-menu-content {
+    background: #fff;
+    width: 300px;
+    border-radius: 24px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+}
+
+.system-menu-list {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0;
+}
+
+.system-menu-item {
+    background: transparent;
+    border: none;
+    padding: 20px 25px;
+    font-size: 20px;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    transition: 0.2s;
+    color: #444;
+}
+
+.system-menu-item:hover {
+    background: #fdf2e9;
+    color: #ff9100;
+}
+
+.system-menu-item .item-icon {
+    font-size: 24px;
+}
+
+.modal-close-btn {
+    background: #f5f5f5;
+    border: none;
+    padding: 15px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #888;
+    cursor: pointer;
+    border-top: 1px solid #eee;
+}
+
+.modal-close-btn:hover {
+    background: #eee;
+    color: #666;
+}
+
+/* プロフィール内容 */
+.profile-content {
+    background: #fff;
+    width: 90%;
+    max-width: 900px;
+    height: 80vh;
+    border-radius: 30px;
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.profile-header {
+    padding: 20px 30px;
+    border-bottom: 2px solid #f0f0f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.profile-header h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.profile-close-icon {
+    background: transparent;
+    border: none;
+    font-size: 32px;
+    color: #bbb;
+    cursor: pointer;
+}
+
+.profile-close-icon:hover {
+    color: #ff5e5e;
+}
+
+.profile-body {
+    flex: 1;
+    display: flex;
+    padding: 30px;
+    gap: 30px;
+}
+
+.profile-left {
+    flex: 0 0 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #f8f9fa;
+    border-radius: 20px;
+    padding: 20px;
+}
+
+.favorite-char-container {
+    flex: 1;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.favorite-char-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.15));
+}
+
+.favorite-char-details {
+    text-align: center;
+    margin-top: 10px;
+    width: 100%;
+}
+
+.fav-rarity {
+    color: #ff9100;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 2px;
+}
+
+.fav-subtitle {
+    color: #666;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.fav-name {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+}
+
+.sub-action-btn {
+    margin-top: 15px;
+    padding: 10px 20px;
+    border-radius: 12px;
+    border: 1px solid #ddd;
+    background: #fff;
+    color: #666;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.sub-action-btn:hover {
+    border-color: #ff9100;
+    color: #ff9100;
+}
+
+.profile-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.profile-info-section {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-label {
+    font-size: 14px;
+    color: #888;
+    margin-bottom: 6px;
+}
+
+.info-input-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.info-input {
+    width: 100%;
+    font-size: 18px;
+    color: #333;
+    background: #f8f9fa;
+    padding: 12px 15px;
+    border: 2px solid transparent;
+    border-radius: 12px;
+    outline: none;
+    transition: 0.2s;
+    font-family: inherit;
+}
+
+.info-input:focus {
+    background: #fff;
+    border-color: #ff9100;
+    box-shadow: 0 0 10px rgba(255, 145, 0, 0.1);
+}
+
+.edit-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #bbb;
+    pointer-events: none;
+    font-size: 16px;
+    transition: 0.2s;
+}
+
+.info-input:focus+.edit-icon {
+    color: #ff9100;
+}
+
+.info-label-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.formation-mini-tabs {
+    display: flex;
+    gap: 5px;
+}
+
+.mini-tab {
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background: #fff;
+    color: #666;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.mini-tab:hover {
+    border-color: #ff9100;
+    color: #ff9100;
+}
+
+.mini-tab.active {
+    background: #ff9100;
+    border-color: #ff9100;
+    color: #fff;
+}
+
+.profile-formation-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 12px;
+    background: #f8f9fa;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+.profile-formation-slot {
+    aspect-ratio: 1;
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    position: relative;
+}
+
+.profile-formation-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.profile-formation-slot .slot-rarity {
+    position: absolute;
+    bottom: 2px;
+    left: 2px;
+    font-size: 12px;
+    color: #ffcc00;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+    line-height: 1;
+}

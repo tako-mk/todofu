@@ -1,0 +1,526 @@
+/* css/todofu.css */
+.todofu-screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    display: none;
+    flex-direction: column;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.todofu-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+}
+
+.todofu-title {
+    flex: 1;
+    text-align: left;
+    margin-left: 70px;
+    font-size: 36px;
+    color: #333;
+    font-family: 'Mochiy Pop P One', sans-serif;
+    text-shadow: 2px 2px 0 #fff;
+}
+
+/* アクションバー (フィルター・ソート) */
+.char-action-bar {
+    display: flex;
+    gap: 15px;
+    padding: 15px 20px;
+    background: #fff;
+    border-bottom: 1px solid #eee;
+    justify-content: flex-start;
+    flex-shrink: 0;
+}
+
+.action-btn {
+    padding: 8px 16px;
+    border: 1px solid #ddd;
+    background: #fdfdfd;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    transition: 0.2s;
+    color: #444;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.action-btn:hover {
+    background: #f0f7ff;
+    border-color: #007bff;
+    color: #007bff;
+}
+
+/* フィルターパネル (モーダル化) */
+.filter-panel {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    /* 裏を暗くする */
+    backdrop-filter: blur(4px);
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    animation: fadeInModal 0.2s ease-out;
+}
+
+@keyframes fadeInModal {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+.filter-panel-content {
+    width: 90%;
+    max-width: 700px;
+    max-height: 85vh;
+    background: #fff;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+    gap: 20px;
+    overflow: hidden;
+    /* 子要素でスクロールさせる */
+}
+
+.filter-section {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.filter-section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.filter-section h4 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+    border-left: 4px solid #ff9100;
+    padding-left: 10px;
+}
+
+.filter-bulk-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.bulk-btn {
+    padding: 4px 10px;
+    font-size: 12px;
+    background: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    cursor: pointer;
+    color: #666;
+    transition: 0.2s;
+}
+
+.bulk-btn:hover {
+    background: #e0e0e0;
+    color: #333;
+}
+
+.checkbox-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #f5f5f5;
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: 0.2s;
+    font-size: 14px;
+    user-select: none;
+}
+
+.checkbox-group label:has(input:checked) {
+    background: #ff9100;
+    color: #fff;
+    box-shadow: 0 2px 5px rgba(255, 145, 0, 0.2);
+}
+
+.checkbox-group input {
+    display: none;
+}
+
+.name-scroll-group {
+    max-height: 250px;
+    overflow-y: auto;
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 15px;
+    border-radius: 12px;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+}
+
+.name-scroll-group label {
+    padding: 6px 4px;
+    justify-content: center;
+    font-size: 13px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.filter-panel-footer {
+    padding-top: 15px;
+    border-top: 1px solid #eee;
+    display: flex;
+    justify-content: center;
+}
+
+.btn-apply-filter {
+    padding: 10px 40px;
+    background: #10d320;
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.btn-apply-filter:hover {
+    background: #32ce24;
+    transform: scale(1.05);
+}
+
+/* メインメニュー */
+.todofu-menu {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex: 1;
+    align-items: center;
+}
+
+.todofu-menu-btn {
+    width: 200px;
+    height: 280px;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border: 4px solid #fff;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.todofu-menu-btn:hover {
+    transform: translateY(-10px) scale(1.05);
+    background: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.todofu-menu-btn .btn-icon {
+    font-size: 60px;
+    margin-bottom: 15px;
+}
+
+.todofu-menu-btn .btn-text {
+    font-size: 28px;
+    font-weight: bold;
+    color: #444;
+}
+
+/* 編成画面 */
+.todofu-formation-view {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+}
+
+.formation-tabs {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.formation-tab {
+    padding: 8px 20px;
+    background: rgba(255, 255, 255, 0.5);
+    border: none;
+    border-radius: 15px;
+    font-size: 25px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.formation-tab.active {
+    background: #ff9100;
+    color: #fff;
+    transform: scale(1.05);
+}
+
+.formation-slots {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 20px;
+    flex: 1;
+    align-items: center;
+    min-height: 0;
+}
+
+.formation-slot {
+    width: 200px;
+    height: 200px;
+    max-width: 18%;
+    background: rgba(255, 255, 255, 0.6);
+    border: 3px dashed #bbb;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    transition: 0.2s;
+    overflow: hidden;
+}
+
+.formation-slot:hover {
+    border-color: #ff9100;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+.formation-slot.occupied {
+    border-style: solid;
+    border-color: #fff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.formation-slot .add-icon {
+    font-size: 40px;
+    color: #bbb;
+    pointer-events: none;
+}
+
+.formation-slot img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background: #fff;
+}
+
+/* キャラクター選択モーダル */
+.char-select-content {
+    width: 90%;
+    max-width: 1000px;
+    height: 80vh;
+    background: #fff;
+    border-radius: 30px;
+    display: flex;
+    overflow: hidden;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+}
+
+.char-select-left {
+    flex: 0 0 320px;
+    background: #f0f4f8;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid #ddd;
+}
+
+.char-preview-area {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.char-preview-area .placeholder {
+    color: #888;
+    font-size: 18px;
+}
+
+.preview-img {
+    width: 100%;
+    max-height: 300px;
+    object-fit: contain;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
+}
+
+.preview-rarity {
+    color: #ff9100;
+    font-size: 22px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.preview-subtitle {
+    color: #666;
+    font-size: 16px;
+    margin-bottom: 5px;
+}
+
+.preview-name {
+    font-size: 32px;
+    font-weight: bold;
+    color: #333;
+}
+
+.char-select-right {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.char-select-grid {
+    flex: 1;
+    padding: 15px;
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, 110px);
+    grid-auto-rows: 110px;
+    /* ← 行の高さを固定 */
+
+    gap: 12px;
+
+    overflow-y: auto;
+    /* ← スクロール */
+    align-content: start;
+    /* ← 上詰め */
+    justify-content: start;
+    /* ← 左詰め */
+}
+
+.grid-item {
+    aspect-ratio: 1/1;
+    background: #fff;
+    border: 2px solid #eee;
+    border-radius: 12px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: 0.2s;
+    position: relative;
+    padding: 5px;
+}
+
+.grid-item:hover {
+    border-color: #ff9100;
+    transform: translateY(-5px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.grid-item.selected {
+    border-color: #ff9100;
+    border-width: 3px;
+    background: #fff9f0;
+}
+
+.grid-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.grid-item-rarity {
+    position: absolute;
+    bottom: 4px;
+    left: 4px;
+    text-shadow: 1px 1px 3px #292929;
+    color: #ffcc00;
+    font-size: 20px;
+    padding: 2px 5px;
+    border-radius: 6px;
+    pointer-events: none;
+    line-height: 1;
+    font-weight: bold;
+}
+
+.formation-slot .grid-item-rarity {
+    font-size: 26px;
+    /* 編成画面ではさらに大きく */
+    bottom: 6px;
+    left: 6px;
+}
+
+.char-select-footer {
+    padding: 15px 25px;
+    background: #fff;
+    border-top: 1px solid #ddd;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+    flex-shrink: 0;
+}
+
+.char-select-footer button {
+    padding: 10px 35px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 12px;
+    cursor: pointer;
+    border: none;
+    transition: 0.2s;
+}
+
+.btn-cancel {
+    background: #eee;
+    color: #666;
+}
+
+.btn-confirm {
+    background: #10d320;
+    color: #fff;
+}
+
+.btn-confirm:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+.btn-confirm:not(:disabled):hover {
+    background: #32ce24;
+    transform: translateY(-2px);
+}
