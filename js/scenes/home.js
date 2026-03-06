@@ -7,5 +7,11 @@ export function initHome() {
     const char = characters[data.character];
 
     const img = document.querySelector(".player-character");
-    img.src = char.image;
+    if (img && char) img.src = char.image;
+
+    // UI更新
+    const moneyEl = document.getElementById("home-money-display");
+    const diamondEl = document.getElementById("home-diamond-display");
+    if (moneyEl) moneyEl.textContent = `💰 ${data.money}`;
+    if (diamondEl) diamondEl.textContent = `💎 ${data.diamond}`;
 }

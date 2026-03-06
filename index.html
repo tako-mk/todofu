@@ -52,8 +52,8 @@
 
                 <div id="home-screen">
                     <div class="top-bar">
-                        <div class="money">💰 1200</div>
-                        <div class="diamond">💎 35</div>
+                        <div id="home-money-display" class="money">💰 1200</div>
+                        <div id="home-diamond-display" class="diamond">💎 35</div>
                     </div>
 
                     <div class="main-area">
@@ -86,8 +86,8 @@
                             <!-- 左側のリスト -->
                             <div class="gacha-list-area">
                                 <button class="gacha-list-item active" data-gacha="pickup">ピックアップガチャ</button>
-                                <button class="gacha-list-item" data-gacha="normal">ノーマルガチャ</button>
                                 <button class="gacha-list-item" data-gacha="event">イベントガチャ</button>
+                                <button class="gacha-list-item" data-gacha="normal">ノーマルガチャ</button>
                             </div>
                         </div><!-- end of gacha-left-panel -->
 
@@ -115,29 +115,19 @@
                             </div>
                         </div><!-- end of gacha-right-panel -->
 
-                        <div id="gacha-rate-modal" class="rate-modal">
-                            <div class="rate-modal-content">
-
-                                <div class="rate-modal-header">
-                                    <div class="rate-modal-title">提供割合</div>
-                                    <button id="rate-close-btn" class="rate-close-btn">×</button>
+                        <div id="gacha-result-modal" class="modal">
+                            <div class="result-modal-content">
+                                <h2 class="result-title">ガチャ結果</h2>
+                                <div id="gacha-result-grid" class="result-grid">
+                                    <!-- 10個の正方形タイルがここに並ぶ -->
                                 </div>
-
-                                <div class="rate-modal-body">
-
-                                    <h3 class="rate-subtitle">レアリティ別</h3>
-
-                                    <table class="rate-table">
-                                    </table>
-
-                                    <h3 class="rate-subtitle">とどーふ別</h3>
-
-                                    <table class="rate-table">
-                                    </table>
-
+                                <div class="result-footer">
+                                    <button id="gacha-result-close" class="btn-close">とじる</button>
+                                    <button id="gacha-draw-again" class="btn-draw-again">もう一度引く</button>
                                 </div>
                             </div>
                         </div>
+
 
                         <div id="gacha-confirm-modal" class="modal">
                             <div class="modal-content">
@@ -148,9 +138,9 @@
                                     ダイヤを <span id="cost-before">100</span> 個消費して<br>
                                     ガチャを引きますか？
                                 </p>
-
+                                <p id="gacha-warning" class="gacha-warning"></p>
                                 <p class="modal-diamond">
-                                    <span id="diamond-before">500</span>個 → 
+                                    <span id="diamond-before">500</span>個 →
                                     <span id="diamond-after">400</span>個
                                 </p>
 
@@ -161,9 +151,56 @@
 
                             </div>
                         </div>
+
+                        <div id="gacha-animation-modal" class="gacha-animation-modal">
+                            <!-- 背景：水色 -->
+                            <div class="gacha-anim-bg"></div>
+
+                            <!-- キャラクター表示エリア：左右分割 -->
+                            <div id="gacha-reveal-container" class="gacha-reveal-container">
+                                <div class="reveal-left">
+                                    <img id="reveal-char-img" src="" alt="character">
+                                </div>
+                                <div class="reveal-right">
+                                    <div id="reveal-new-badge" class="new-badge" style="display: none;">NEW!</div>
+                                    <div id="reveal-char-rarity" class="reveal-rarity"></div>
+                                    <div id="reveal-char-subtitle" class="reveal-subtitle"></div>
+                                    <div id="reveal-char-prefecture" class="reveal-prefecture"></div>
+                                </div>
+                            </div>
+
+                            <!-- ホワイトアウト幕（左右に開く） -->
+                            <div id="gacha-curtain-left" class="gacha-curtain-left"></div>
+                            <div id="gacha-curtain-right" class="gacha-curtain-right"></div>
+
+                            <!-- タッププロンプト -->
+                            <div id="gacha-tap-prompt" class="gacha-tap-prompt">tap!</div>
+
+                        </div>
+
+                        <!-- 提供割合モーダル -->
+                        <div id="gacha-rate-modal" class="modal">
+                            <div class="rate-modal-content">
+                                <h2 class="rate-title">提供割合</h2>
+                                <div class="rate-scroll-area">
+                                    <table class="rate-table">
+                                        <!-- レアリティ別の確率をJSで挿入 -->
+                                    </table>
+                                    <div class="character-rate-list">
+                                        <h3>出現キャラクター一覧</h3>
+                                        <div id="char-rate-table" class="char-rate-table">
+                                            <!-- 個別キャラの確率をJSで挿入 -->
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="rate-footer">
+                                    <button class="rate-close-btn">とじる</button>
+                                </div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-
 
             </div>
         </div>

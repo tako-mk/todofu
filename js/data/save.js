@@ -5,8 +5,9 @@ export function savePlayerData(data) {
 
 export function loadPlayerData() {
     return JSON.parse(localStorage.getItem("todofu_save")) || {
-        character: "hokkaido",
+        character: "hokkaido_a",
         money: 1200,
-        diamond: 35
+        diamond: 5000,
+        collection: []
     };
 }
