@@ -42,8 +42,19 @@ export function initTodofu() {
 
     // もどるボタン
     backBtn.addEventListener("pointerdown", () => {
+        const trainingView = document.getElementById("todofu-training-view");
+        const selectionView = document.getElementById("todofu-training-selection-view");
+
         if (formationView.style.display === "flex") {
             formationView.style.display = "none";
+            menu.style.display = "flex";
+            title.textContent = "とどーふ";
+        } else if (trainingView.style.display === "flex") {
+            trainingView.style.display = "none";
+            selectionView.style.display = "flex";
+            title.textContent = "とどーふ選択";
+        } else if (selectionView.style.display === "flex") {
+            selectionView.style.display = "none";
             menu.style.display = "flex";
             title.textContent = "とどーふ";
         } else {
@@ -86,6 +97,13 @@ export function initTodofu() {
 
     // フィルタ・ソートUIイベント
     initFilterSortUI();
+    renderNameFilterOptions(); // 追加: 起動時にチェックボックスを生成しておく
+}
+
+// 外部からフィルター反映時の挙動を指定できるようにする
+let filterChangeCallback = null;
+export function setFilterChangeCallback(callback) {
+    filterChangeCallback = callback;
 }
 
 function initFilterSortUI() {
@@ -94,6 +112,11 @@ function initFilterSortUI() {
     const btnCloseFilter = document.getElementById("btn-close-filter");
     const btnToggleSort = document.getElementById("btn-toggle-sort");
 
+    if (!filterPanel || !btnOpenFilter || !btnCloseFilter || !btnToggleSort) {
+        console.warn("Filter UI elements not found. Skipping init.");
+        return;
+    }
+
     btnOpenFilter.onclick = () => {
         filterPanel.style.display = "flex";
         renderNameFilterOptions();
@@ -101,7 +124,11 @@ function initFilterSortUI() {
 
     btnCloseFilter.onclick = () => {
         filterPanel.style.display = "none";
-        renderCharList(); // 設定を反映して再描画
+        if (filterChangeCallback) {
+            filterChangeCallback();
+        } else {
+            renderCharList();
+        }
     };
 
     btnToggleSort.onclick = () => {
@@ -111,38 +138,53 @@ function initFilterSortUI() {
     };
 
     // 一括操作ボタン
-    document.getElementById("btn-rarity-all").onclick = () => {
-        document.querySelectorAll(".filter-rarity-check").forEach(c => c.checked = true);
-        activeRarities = [4, 3, 2, 1];
-        renderCharList();
-    };
-    document.getElementById("btn-rarity-none").onclick = () => {
-        document.querySelectorAll(".filter-rarity-check").forEach(c => c.checked = false);
-        activeRarities = [];
-        renderCharList();
-    };
-    document.getElementById("btn-name-all").onclick = () => {
-        activeNames = [...allPrefNames];
-        renderNameFilterOptions();
-        renderCharList();
-    };
-    document.getElementById("btn-name-none").onclick = () => {
-        activeNames = [];
-        renderNameFilterOptions();
-        renderCharList();
-    };
+    const btnRarityAll = document.getElementById("btn-rarity-all");
+    const btnRarityNone = document.getElementById("btn-rarity-none");
+    const btnNameAll = document.getElementById("btn-name-all");
+    const btnNameNone = document.getElementById("btn-name-none");
+
+    if (btnRarityAll) {
+        btnRarityAll.onclick = () => {
+            document.querySelectorAll(".filter-rarity-check").forEach(c => c.checked = true);
+            activeRarities = [4, 3, 2, 1];
+            if (filterChangeCallback) filterChangeCallback(); else renderCharList();
+        };
+    }
+    if (btnRarityNone) {
+        btnRarityNone.onclick = () => {
+            document.querySelectorAll(".filter-rarity-check").forEach(c => c.checked = false);
+            activeRarities = [];
+            if (filterChangeCallback) filterChangeCallback(); else renderCharList();
+        };
+    }
+    if (btnNameAll) {
+        btnNameAll.onclick = () => {
+            document.querySelectorAll(".filter-name-check").forEach(c => c.checked = true);
+            activeNames = [...allPrefNames];
+            if (filterChangeCallback) filterChangeCallback(); else renderCharList();
+        };
+    }
+    if (btnNameNone) {
+        btnNameNone.onclick = () => {
+            document.querySelectorAll(".filter-name-check").forEach(c => c.checked = false);
+            activeNames = [];
+            if (filterChangeCallback) filterChangeCallback(); else renderCharList();
+        };
+    }
+
 
     // レアリティチェックボックスのイベント
     document.querySelectorAll(".filter-rarity-check").forEach(chk => {
         chk.onchange = () => {
             activeRarities = Array.from(document.querySelectorAll(".filter-rarity-check:checked")).map(c => parseInt(c.value));
-            renderCharList();
+            if (filterChangeCallback) filterChangeCallback(); else renderCharList();
         };
     });
 }
 
-function renderNameFilterOptions() {
+export function renderNameFilterOptions() {
     const nameGroup = document.getElementById("filter-name-group");
+    if (!nameGroup) return;
     nameGroup.innerHTML = "";
 
     allPrefNames.forEach(name => {
@@ -153,7 +195,7 @@ function renderNameFilterOptions() {
         const chk = label.querySelector("input");
         chk.onchange = () => {
             activeNames = Array.from(document.querySelectorAll(".filter-name-check:checked")).map(c => c.value);
-            renderCharList();
+            if (filterChangeCallback) filterChangeCallback(); else renderCharList();
         };
 
         nameGroup.appendChild(label);
@@ -279,8 +321,10 @@ function updatePreview(charId) {
     const prefName = getPrefNameByCharId(charId);
 
     preview.innerHTML = `
-        <img src="${char.image}" class="preview-img">
-        <div class="preview-rarity">☆${char.rarity}</div>
+        <div class="preview-img-container">
+            <img src="${char.image}" class="preview-img">
+            <div class="grid-item-rarity">${"★".repeat(char.rarity)}</div>
+        </div>
         <div class="preview-subtitle">${char.subtitle}</div>
         <div class="preview-name">${prefName}</div>
     `;

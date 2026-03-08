@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="css/gacha.css">
     <link rel="stylesheet" href="css/todofu.css">
     <link rel="stylesheet" href="css/system.css">
+    <link rel="stylesheet" href="css/training.css">
     <link rel="stylesheet" href="css/animation.css">
 </head>
 
@@ -215,7 +216,7 @@
                     <!-- メインメニュー -->
                     <div id="todofu-menu" class="todofu-menu">
                         <button id="btn-formation" class="todofu-menu-btn">
-                            <span class="btn-icon">⚔️</span>
+                            <span class="btn-icon">🛠️</span>
                             <span class="btn-text">編成</span>
                         </button>
                         <button id="btn-training" class="todofu-menu-btn">
@@ -241,6 +242,56 @@
                             <!-- JSで5つのスロットを生成 -->
                         </div>
                     </div>
+
+                    <!-- 育成キャラクター選択画面 -->
+                    <div id="todofu-training-selection-view" class="todofu-training-selection-view"
+                        style="display: none;">
+                        <div class="selection-left">
+                            <div id="training-selection-preview" class="char-preview-area">
+                                <!-- プレビュー内容 -->
+                                <p class="placeholder-text">育成するとどーふを<br>選んでください</p>
+                            </div>
+                            <button id="btn-confirm-training-selection" class="btn-primary" disabled>決定</button>
+                        </div>
+                        <div class="selection-right">
+                            <div class="selection-controls">
+                                <button id="btn-training-filter" class="action-btn">🔍 フィルター</button>
+                                <button id="btn-training-sort" class="action-btn">↕ ソート: レアリティ順</button>
+                            </div>
+                            <div id="training-selection-grid" class="training-selection-grid">
+                                <!-- JSで所持キャラ一覧を表示 -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 育成画面 -->
+                    <div id="todofu-training-view" class="todofu-training-view" style="display: none;">
+                        <div class="training-container">
+                            <!-- 左側: キャラクター表示 -->
+                            <div class="training-left">
+                                <div id="training-char-preview" class="training-char-card">
+                                    <div id="training-char-subtitle" class="training-subtitle"></div>
+                                    <div id="training-char-name" class="training-name"></div>
+                                    <!-- JSで画像、レベル、XPを表示 -->
+                                </div>
+                            </div>
+                            <!-- 右側: アイテム使用 -->
+                            <div class="training-right">
+                                <div class="training-items-list">
+                                    <h3>育成アイテム</h3>
+                                    <div id="training-items-container">
+                                        <!-- JSでアイテム行を生成 -->
+                                    </div>
+                                </div>
+                                <div class="training-footer">
+                                    <div class="expected-gain">
+                                        獲得XP: <span id="xp-gain-value">0</span>
+                                    </div>
+                                    <button id="btn-execute-training" class="btn-primary">育成開始</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- キャラクター選択モーダル -->
@@ -261,50 +312,50 @@
                                 <!-- 所持キャラ一覧をJSで表示 -->
                             </div>
 
-                            <!-- フィルター設定パネル（オーバーレイ的に表示） -->
-                            <div id="filter-panel" class="filter-panel" style="display: none;">
-                                <div class="filter-panel-content">
-                                    <div class="filter-section">
-                                        <div class="filter-section-header">
-                                            <h4>レアリティ</h4>
-                                            <div class="filter-bulk-actions">
-                                                <button id="btn-rarity-all" class="bulk-btn">全選択</button>
-                                                <button id="btn-rarity-none" class="bulk-btn">全解除</button>
-                                            </div>
-                                        </div>
-                                        <div class="checkbox-group">
-                                            <label><input type="checkbox" class="filter-rarity-check" value="4" checked>
-                                                ☆4</label>
-                                            <label><input type="checkbox" class="filter-rarity-check" value="3" checked>
-                                                ☆3</label>
-                                            <label><input type="checkbox" class="filter-rarity-check" value="2" checked>
-                                                ☆2</label>
-                                            <label><input type="checkbox" class="filter-rarity-check" value="1" checked>
-                                                ☆1</label>
-                                        </div>
-                                    </div>
-                                    <div class="filter-section">
-                                        <div class="filter-section-header">
-                                            <h4>とどーふ</h4>
-                                            <div class="filter-bulk-actions">
-                                                <button id="btn-name-all" class="bulk-btn">全選択</button>
-                                                <button id="btn-name-none" class="bulk-btn">全解除</button>
-                                            </div>
-                                        </div>
-                                        <div id="filter-name-group" class="checkbox-group name-scroll-group">
-                                            <!-- JSで全47都道府県を動的に生成 -->
-                                        </div>
-                                    </div>
-                                    <div class="filter-panel-footer">
-                                        <button id="btn-close-filter" class="btn-apply-filter">とじる</button>
-                                    </div>
-                                </div>
-                            </div>
-
                             <div class="char-select-footer">
                                 <button id="btn-cancel-select" class="btn-cancel">やめる</button>
                                 <button id="btn-confirm-select" class="btn-confirm" disabled>決定</button>
                             </div>
+                        </div> <!-- end of char-select-right -->
+                    </div> <!-- end of char-select-content -->
+                </div> <!-- end of todofu-char-select-modal -->
+
+                <!-- フィルター設定パネル（グローバル・最前面） -->
+                <div id="filter-panel" class="filter-panel" style="display: none; z-index: 1000;">
+                    <div class="filter-panel-content">
+                        <div class="filter-section">
+                            <div class="filter-section-header">
+                                <h4>レアリティ</h4>
+                                <div class="filter-bulk-actions">
+                                    <button id="btn-rarity-all" class="bulk-btn">全選択</button>
+                                    <button id="btn-rarity-none" class="bulk-btn">全解除</button>
+                                </div>
+                            </div>
+                            <div class="checkbox-group">
+                                <label><input type="checkbox" class="filter-rarity-check" value="4" checked>
+                                    ☆4</label>
+                                <label><input type="checkbox" class="filter-rarity-check" value="3" checked>
+                                    ☆3</label>
+                                <label><input type="checkbox" class="filter-rarity-check" value="2" checked>
+                                    ☆2</label>
+                                <label><input type="checkbox" class="filter-rarity-check" value="1" checked>
+                                    ☆1</label>
+                            </div>
+                        </div>
+                        <div class="filter-section">
+                            <div class="filter-section-header">
+                                <h4>とどーふ</h4>
+                                <div class="filter-bulk-actions">
+                                    <button id="btn-name-all" class="bulk-btn">全選択</button>
+                                    <button id="btn-name-none" class="bulk-btn">全解除</button>
+                                </div>
+                            </div>
+                            <div id="filter-name-group" class="checkbox-group name-scroll-group">
+                                <!-- JSで全47都道府県を動的に生成 -->
+                            </div>
+                        </div>
+                        <div class="filter-panel-footer">
+                            <button id="btn-close-filter" class="btn-apply-filter">とじる</button>
                         </div>
                     </div>
                 </div>
@@ -381,12 +432,10 @@
                     </div>
                 </div>
 
-            </div>
-        </div>
-    </div>
-
-
-    <canvas id="game"></canvas>
+                <canvas id="game"></canvas>
+            </div> <!-- end of game-screen -->
+        </div> <!-- end of game-root -->
+    </div> <!-- end of viewport -->
 
     <script type="module" src="js/main.js"></script>
 </body>

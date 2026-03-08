@@ -32,7 +32,7 @@
 
 /* モーダル共通オーバーレイ */
 .modal-overlay {
-    position: fixed;
+    position: absolute;
     inset: 0;
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(5px);
@@ -119,7 +119,7 @@
     background: #fff;
     width: 90%;
     max-width: 900px;
-    height: 80vh;
+    height: 90%;
     border-radius: 30px;
     box-shadow: 0 25px 60px rgba(0, 0, 0, 0.4);
     display: flex;
@@ -176,6 +176,23 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    /* 子要素の絶対配置のため */
+}
+
+.favorite-char-container .preview-img-container {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.favorite-char-container .grid-item-rarity {
+    font-size: 36px;
+    bottom: 10px;
+    left: 10px;
 }
 
 .favorite-char-container img {
@@ -189,13 +206,6 @@
     text-align: center;
     margin-top: 10px;
     width: 100%;
-}
-
-.fav-rarity {
-    color: #ff9100;
-    font-size: 20px;
-    font-weight: bold;
-    margin-bottom: 2px;
 }
 
 .fav-subtitle {
@@ -350,11 +360,11 @@
     object-fit: contain;
 }
 
-.profile-formation-slot .slot-rarity {
+.profile-formation-slot .grid-item-rarity {
     position: absolute;
     bottom: 2px;
     left: 2px;
-    font-size: 12px;
+    font-size: 14px;
     color: #ffcc00;
     text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
     line-height: 1;

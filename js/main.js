@@ -9,6 +9,7 @@ import { initHome } from "./scenes/home.js";
 import { initGacha } from "./scenes/gacha.js";
 import { initTodofu } from "./scenes/todofu.js";
 import { initSystemMenu } from "./scenes/system.js";
+import { initTraining } from "./scenes/training.js";
 
 // ゲーム開始済みフラグ（多重起動防止）
 let started = false;
@@ -150,3 +151,4 @@ initTitle();
 initGacha();
 initTodofu();
 initSystemMenu();
+initTraining();

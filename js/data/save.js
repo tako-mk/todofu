@@ -21,7 +21,14 @@ export function loadPlayerData() {
             comment: "日本全国制覇を目指しています！",
             favoriteCharId: "hokkaido_a",
             displayFormationIdx: 0
-        }
+        },
+        items: {
+            "training_platinum": 1,
+            "training_gold": 2,
+            "training_silver": 5,
+            "training_bronze": 10
+        },
+        charStats: {} // { charId: { level: 1, xp: 0 } }
     };
 
     const saved = JSON.parse(localStorage.getItem("todofu_save"));

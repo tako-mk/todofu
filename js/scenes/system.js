@@ -106,11 +106,12 @@ export function renderProfile() {
     if (profile.favoriteCharId) {
         const char = characters_flat[profile.favoriteCharId];
         if (char) {
-            const img = document.createElement("img");
-            img.src = char.image;
-            favContainer.appendChild(img);
-
-            favRarity.textContent = "★".repeat(char.rarity);
+            favContainer.innerHTML = `
+                <div class="preview-img-container">
+                    <img src="${char.image}" alt="">
+                    <div class="grid-item-rarity">${"★".repeat(char.rarity)}</div>
+                </div>
+            `;
             favSubtitle.textContent = char.subtitle;
             favName.textContent = getPrefNameByCharId(profile.favoriteCharId);
         }
@@ -144,7 +145,7 @@ export function renderProfile() {
                 slot.appendChild(img);
 
                 const rarity = document.createElement("div");
-                rarity.className = "slot-rarity";
+                rarity.className = "grid-item-rarity";
                 rarity.textContent = "★".repeat(char.rarity);
                 slot.appendChild(rarity);
             }

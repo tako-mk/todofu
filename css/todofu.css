@@ -60,7 +60,7 @@
 
 /* フィルターパネル (モーダル化) */
 .filter-panel {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     right: 0;
@@ -89,7 +89,7 @@
 .filter-panel-content {
     width: 90%;
     max-width: 700px;
-    max-height: 85vh;
+    max-height: 90%;
     background: #fff;
     border-radius: 20px;
     display: flex;
@@ -347,7 +347,7 @@
 .char-select-content {
     width: 90%;
     max-width: 1000px;
-    height: 80vh;
+    height: 90%;
     background: #fff;
     border-radius: 30px;
     display: flex;
@@ -381,19 +381,24 @@
     font-size: 18px;
 }
 
+.preview-img-container {
+    position: relative;
+    width: 100%;
+    max-width: 250px;
+    margin-bottom: 20px;
+}
+
 .preview-img {
     width: 100%;
-    max-height: 300px;
     object-fit: contain;
-    margin-bottom: 20px;
     filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.15));
 }
 
-.preview-rarity {
-    color: #ff9100;
-    font-size: 22px;
-    font-weight: bold;
-    margin-bottom: 5px;
+.preview-img-container .grid-item-rarity {
+    font-size: 32px;
+    /* プレビューでは大きく表示 */
+    bottom: 10px;
+    left: 10px;
 }
 
 .preview-subtitle {
