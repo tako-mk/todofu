@@ -367,8 +367,11 @@
                             <button id="btn-open-profile" class="system-menu-item">
                                 <span class="item-icon">👤</span> プロフィール
                             </button>
-                            <button class="system-menu-item">
+                            <button id="btn-open-settings" class="system-menu-item">
                                 <span class="item-icon">⚙️</span> 設定
+                            </button>
+                            <button id="btn-reset-data" class="system-menu-item danger">
+                                <span class="item-icon">⚠️</span> データをリセット
                             </button>
                             <button class="system-menu-item">
                                 <span class="item-icon">📜</span> クレジット
@@ -428,6 +431,22 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- リセット確認モーダル -->
+                <div id="reset-confirm-modal" class="modal-overlay" style="display: none; z-index: 10000;">
+                    <div class="modal-content">
+                        <h2 class="modal-title">データの初期化</h2>
+                        <p class="modal-text">
+                            これまでの進捗（キャラクター、ダイヤ、アイテムなど）を<br>
+                            すべて消去して最初からやり直しますか？
+                        </p>
+                        <p class="gacha-warning">この操作は取り消せません。</p>
+                        <div class="modal-buttons">
+                            <button id="btn-reset-cancel" class="btn-cancel">やめる</button>
+                            <button id="btn-reset-confirm" class="btn-confirm danger">初期化する</button>
                         </div>
                     </div>
                 </div>

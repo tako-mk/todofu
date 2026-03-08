@@ -40,3 +40,6 @@ export function loadPlayerData() {
         ...saved
     };
 }
+export function resetPlayerData() {
+    localStorage.removeItem("todofu_save");
+}

@@ -1,4 +1,4 @@
-import { loadPlayerData, savePlayerData } from "../data/save.js";
+import { loadPlayerData, savePlayerData, resetPlayerData } from "../data/save.js";
 import { characters as characters_flat } from "../data/characters_flat.js";
 import { openCharSelect } from "./todofu.js";
 import { getPrefNameByCharId } from "../data/characterUtil.js";
@@ -10,6 +10,11 @@ export function initSystemMenu() {
     const closeBtn = document.getElementById("btn-close-system-menu");
 
     const btnOpenProfile = document.getElementById("btn-open-profile");
+    const btnResetData = document.getElementById("btn-reset-data");
+    const resetConfirmModal = document.getElementById("reset-confirm-modal");
+    const btnResetCancel = document.getElementById("btn-reset-cancel");
+    const btnResetConfirm = document.getElementById("btn-reset-confirm");
+
     const profileModal = document.getElementById("profile-modal");
     const closeProfileBtn = document.getElementById("btn-close-profile");
 
@@ -35,6 +40,21 @@ export function initSystemMenu() {
 
     closeProfileBtn.addEventListener("pointerdown", () => {
         profileModal.style.display = "none";
+    });
+
+    // データリセット
+    btnResetData.addEventListener("pointerdown", () => {
+        menuModal.style.display = "none";
+        resetConfirmModal.style.display = "flex";
+    });
+
+    btnResetCancel.addEventListener("pointerdown", () => {
+        resetConfirmModal.style.display = "none";
+    });
+
+    btnResetConfirm.addEventListener("pointerdown", () => {
+        resetPlayerData();
+        window.location.reload();
     });
 
     // 名前入力
@@ -75,7 +95,7 @@ export function initSystemMenu() {
     });
 
     // モーダルの外側をクリックして閉じる
-    [menuModal, profileModal].forEach(modal => {
+    [menuModal, profileModal, resetConfirmModal].forEach(modal => {
         modal.addEventListener("pointerdown", (e) => {
             if (e.target === modal) {
                 modal.style.display = "none";

@@ -279,7 +279,7 @@
     /* 横並びに戻す */
     align-items: center;
     gap: 15px;
-    padding: 15px;
+    padding: 10px;
     background: #f8f9fa;
     border-radius: 15px;
 }
@@ -293,32 +293,37 @@
 }
 
 .item-thumb {
-    width: 48px;
-    /* 少し小さく */
-    height: 48px;
-    border-radius: 10px;
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 24px;
-    color: #fff;
+    overflow: hidden;
+    background: #eee;
     flex-shrink: 0;
 }
 
+.item-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
 .item-thumb.platinum {
-    background: linear-gradient(135deg, #e5e4e2, #b4b4b4);
+    background: #e5e4e2;
 }
 
 .item-thumb.gold {
-    background: linear-gradient(135deg, #ffd700, #daa520);
+    background: #ffd700;
 }
 
 .item-thumb.silver {
-    background: linear-gradient(135deg, #c0c0c0, #a9a9a9);
+    background: #c0c0c0;
 }
 
 .item-thumb.bronze {
-    background: linear-gradient(135deg, #cd7f32, #8b4513);
+    background: #cd7f32;
 }
 
 .item-info {

@@ -31,10 +31,10 @@ const itemNames = {
 };
 
 const itemIcons = {
-    "training_platinum": "💎",
-    "training_gold": "🥇",
-    "training_silver": "🥈",
-    "training_bronze": "🥉"
+    "training_platinum": "assets/images/items/platinum_tax_card.png",
+    "training_gold": "assets/images/items/gold_tax_card.png",
+    "training_silver": "assets/images/items/silver_tax_card.png",
+    "training_bronze": "assets/images/items/bronze_tax_card.png"
 };
 
 export function initTraining() {
@@ -198,7 +198,7 @@ function renderTrainingView() {
     document.getElementById("training-char-name").textContent = prefName;
 
     const previewArea = document.getElementById("training-char-preview");
-    const existingElements = previewArea.querySelectorAll("img, .training-level-row, .training-xp-bar-container, .training-xp-text");
+    const existingElements = previewArea.querySelectorAll("img, .preview-img-container, .training-level-row, .training-xp-bar-container, .training-xp-text");
     existingElements.forEach(el => el.remove());
 
     const contentScroll = document.createElement("div");
@@ -231,7 +231,7 @@ function renderTrainingView() {
         const typeClass = key.split("_")[1];
         row.innerHTML = `
             <div class="item-header-part">
-                <div class="item-thumb ${typeClass}">${itemIcons[key]}</div>
+                <div class="item-thumb ${typeClass}"><img src="${itemIcons[key]}" alt=""></div>
                 <div class="item-info">
                     <div class="item-name">${itemNames[key]}</div>
                     <div class="item-usage-blocks" id="usage-blocks-${key}">
