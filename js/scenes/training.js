@@ -151,7 +151,8 @@ function renderSelectionGrid() {
             ...characters_flat[id],
             prefName: getPrefNameByCharId(id),
             orderIndex: canonicalIds.indexOf(id),
-            level: stats.level
+            level: stats.level,
+            reformed: stats.reformed
         };
     });
 
@@ -186,7 +187,7 @@ function renderSelectionGrid() {
         charItem.className = "char-item" + (tempSelectedCharId === char.id ? " selected" : "");
         charItem.innerHTML = `
             <img src="${char.image}" alt="">
-            <div class="grid-item-rarity">${"★".repeat(char.rarity)}</div>
+            <div class="grid-item-rarity${char.reformed ? ' reformed' : ''}">${"★".repeat(char.rarity)}</div>
             <div class="grid-item-level">Lv.${char.level}</div>
         `;
 
@@ -222,7 +223,7 @@ function updateSelectionPreview(charId) {
         <div class="training-name" style="font-size: 28px;">${prefName}</div>
         <div class="preview-img-container">
             <img src="${char.image}" style="max-height: 200px; margin-bottom: 10px;">
-            <div class="grid-item-rarity">${"★".repeat(char.rarity)}</div>
+            <div class="grid-item-rarity${stats.reformed ? ' reformed' : ''}">${"★".repeat(char.rarity)}</div>
         </div>
         <div class="training-level" style="margin-bottom: 5px;">Lv <span>${stats.level}</span><span class="level-max-label"> / ${maxLv}</span></div>
         ${buildStatsPanelHTML(charId, stats.level)}
@@ -275,7 +276,7 @@ function renderTrainingView() {
     contentScroll.innerHTML = `
         <div class="preview-img-container">
             <img src="${char.image}" alt="">
-            <div class="grid-item-rarity">${"★".repeat(char.rarity)}</div>
+            <div class="grid-item-rarity${stats.reformed ? ' reformed' : ''}">${"★".repeat(char.rarity)}</div>
         </div>
         <div class="training-level-row">
             <div id="training-level-block" class="training-level">Lv <span id="training-current-lv">${stats.level}</span><span class="level-max-label"> / ${maxLv}</span></div>

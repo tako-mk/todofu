@@ -242,7 +242,7 @@ function renderFormation() {
 
             // レアリティ表示を追加
             const rarityDiv = document.createElement("div");
-            rarityDiv.className = "grid-item-rarity";
+            rarityDiv.className = "grid-item-rarity" + (stats.reformed ? " reformed" : "");
             rarityDiv.textContent = "★".repeat(char.rarity);
             slot.appendChild(rarityDiv);
 
@@ -300,7 +300,6 @@ function renderCharList() {
     grid.innerHTML = "";
     preview.innerHTML = '<div class="placeholder">キャラクターを選択してください</div>';
 
-    // 所持キャラ
     let list = (playerData.collection || []).map(id => {
         const stats = playerData.charStats[id] || { level: 1, xp: 0, reformed: false };
         return {
@@ -308,7 +307,8 @@ function renderCharList() {
             ...characters_flat[id],
             prefName: getPrefNameByCharId(id),
             orderIndex: canonicalOrder.indexOf(id),
-            level: stats.level
+            level: stats.level,
+            reformed: stats.reformed
         };
     });
 
@@ -374,7 +374,7 @@ function updatePreview(charId) {
         <div class="preview-name" style="margin-bottom: 5px;">${prefName}</div>
         <div class="preview-img-container" style="margin-bottom: 5px;">
             <img src="${char.image}" class="preview-img" style="max-height: 180px;">
-            <div class="grid-item-rarity">${"★".repeat(char.rarity)}</div>
+            <div class="grid-item-rarity${stats.reformed ? ' reformed' : ''}">${"★".repeat(char.rarity)}</div>
         </div>
         <div class="training-level" style="margin-bottom: 10px;  margin-top: 10px; font-size: 14px;">Lv <span>${stats.level}</span><span class="level-max-label"> / ${maxLv}</span></div>
         ${buildStatsPanelHTML(charId, stats.level)}

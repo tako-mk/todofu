@@ -125,11 +125,12 @@ export function renderProfile() {
 
     if (profile.favoriteCharId) {
         const char = characters_flat[profile.favoriteCharId];
+        const stats = playerData.charStats[profile.favoriteCharId] || { reformed: false };
         if (char) {
             favContainer.innerHTML = `
                 <div class="preview-img-container">
                     <img src="${char.image}" alt="">
-                    <div class="grid-item-rarity">${"★".repeat(char.rarity)}</div>
+                    <div class="grid-item-rarity${stats.reformed ? ' reformed' : ''}">${"★".repeat(char.rarity)}</div>
                 </div>
             `;
             favSubtitle.textContent = char.subtitle;
@@ -159,13 +160,14 @@ export function renderProfile() {
 
         if (charId) {
             const char = characters_flat[charId];
+            const stats = playerData.charStats[charId] || { reformed: false };
             if (char) {
                 const img = document.createElement("img");
                 img.src = char.image;
                 slot.appendChild(img);
 
                 const rarity = document.createElement("div");
-                rarity.className = "grid-item-rarity";
+                rarity.className = "grid-item-rarity" + (stats.reformed ? " reformed" : "");
                 rarity.textContent = "★".repeat(char.rarity);
                 slot.appendChild(rarity);
             }

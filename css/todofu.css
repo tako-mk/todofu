@@ -483,6 +483,15 @@
     font-weight: bold;
 }
 
+.grid-item-rarity.reformed {
+    background: linear-gradient(90deg, #ff4c4c, #ff9e4c, #ffec4c, #6cff4c, #4c96ff, #9e4cff);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    text-shadow: none;
+    filter: drop-shadow(1px 1px 3px rgba(0, 0, 0, 0.8));
+}
+
 .formation-slot .grid-item-rarity {
     font-size: 26px;
     /* 編成画面ではさらに大きく */
