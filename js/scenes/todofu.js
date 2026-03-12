@@ -2,6 +2,7 @@ import { loadPlayerData, savePlayerData } from "../data/save.js";
 import { characters as characters_flat } from "../data/characters_flat.js";
 import { characters as characters_raw } from "../data/characters.js";
 import { getPrefNameByCharId } from "../data/characterUtil.js";
+import { buildStatsPanelHTML, getMaxLevel, calcEffectiveStats } from "./training.js";
 
 let playerData = null;
 let currentTeamIdx = 0;
@@ -132,8 +133,16 @@ function initFilterSortUI() {
     };
 
     btnToggleSort.onclick = () => {
-        sortMode = (sortMode === "rarity") ? "default" : "rarity";
-        btnToggleSort.textContent = `↕ ソート: ${sortMode === "rarity" ? "レアリティ順" : "デフォルト順"}`;
+        if (sortMode === "rarity") {
+            sortMode = "level";
+            btnToggleSort.textContent = "↕ ソート: レベル順";
+        } else if (sortMode === "level") {
+            sortMode = "default";
+            btnToggleSort.textContent = "↕ ソート: デフォルト順";
+        } else {
+            sortMode = "rarity";
+            btnToggleSort.textContent = "↕ ソート: レアリティ順";
+        }
         renderCharList();
     };
 
@@ -209,12 +218,24 @@ function renderFormation() {
     const team = playerData.formations ? playerData.formations[currentTeamIdx] : null;
     if (!team) return;
 
+    let sums = { economy: 0, agriculture: 0, industry: 0, tourism: 0 };
+
     team.forEach((charId, idx) => {
         const slot = document.createElement("div");
         slot.className = "formation-slot" + (charId ? " occupied" : "");
 
         if (charId) {
             const char = characters_flat[charId];
+            const stats = playerData.charStats[charId] || { level: 1, xp: 0, reformed: false };
+            const effective = calcEffectiveStats(charId, stats.level);
+
+            if (effective) {
+                sums.economy += parseFloat(effective.economy);
+                sums.agriculture += parseFloat(effective.agriculture);
+                sums.industry += parseFloat(effective.industry);
+                sums.tourism += parseFloat(effective.tourism);
+            }
+
             const img = document.createElement("img");
             img.src = char.image;
             slot.appendChild(img);
@@ -224,6 +245,12 @@ function renderFormation() {
             rarityDiv.className = "grid-item-rarity";
             rarityDiv.textContent = "★".repeat(char.rarity);
             slot.appendChild(rarityDiv);
+
+            // レベル表示を追加
+            const levelDiv = document.createElement("div");
+            levelDiv.className = "grid-item-level";
+            levelDiv.textContent = "Lv." + stats.level;
+            slot.appendChild(levelDiv);
         } else {
             const plus = document.createElement("div");
             plus.className = "add-icon";
@@ -237,6 +264,20 @@ function renderFormation() {
 
         slotsContainer.appendChild(slot);
     });
+
+    // 合計ステータスの表示更新
+    const totalStatsEl = document.getElementById("formation-total-stats");
+    if (totalStatsEl) {
+        totalStatsEl.innerHTML = `
+            <div class="formation-total-title">合計ステータス</div>
+            <div class="formation-total-row">
+                <div class="formation-total-item"><span class="total-label">💰 経済</span><span class="total-value">${sums.economy.toFixed(2)}</span></div>
+                <div class="formation-total-item"><span class="total-label">🌾 農業</span><span class="total-value">${sums.agriculture.toFixed(2)}</span></div>
+                <div class="formation-total-item"><span class="total-label">🏭 工業</span><span class="total-value">${sums.industry.toFixed(2)}</span></div>
+                <div class="formation-total-item"><span class="total-label">🗺 観光</span><span class="total-value">${sums.tourism.toFixed(2)}</span></div>
+            </div>
+        `;
+    }
 }
 
 let selectionCallback = null;
@@ -260,12 +301,16 @@ function renderCharList() {
     preview.innerHTML = '<div class="placeholder">キャラクターを選択してください</div>';
 
     // 所持キャラ
-    let list = (playerData.collection || []).map(id => ({
-        id,
-        ...characters_flat[id],
-        prefName: getPrefNameByCharId(id),
-        orderIndex: canonicalOrder.indexOf(id)
-    }));
+    let list = (playerData.collection || []).map(id => {
+        const stats = playerData.charStats[id] || { level: 1, xp: 0, reformed: false };
+        return {
+            id,
+            ...characters_flat[id],
+            prefName: getPrefNameByCharId(id),
+            orderIndex: canonicalOrder.indexOf(id),
+            level: stats.level
+        };
+    });
 
     // フィルタリング
     // 1. レアリティ
@@ -289,7 +334,9 @@ function renderCharList() {
 
     // ソート
     if (sortMode === "rarity") {
-        list.sort((a, b) => b.rarity - a.rarity || a.orderIndex - b.orderIndex);
+        list.sort((a, b) => b.rarity - a.rarity || b.level - a.level || a.orderIndex - b.orderIndex);
+    } else if (sortMode === "level") {
+        list.sort((a, b) => b.level - a.level || b.rarity - a.rarity || a.orderIndex - b.orderIndex);
     } else {
         list.sort((a, b) => a.orderIndex - b.orderIndex);
     }
@@ -319,13 +366,17 @@ function updatePreview(charId) {
     const char = characters_flat[charId];
     const preview = document.getElementById("char-preview-area");
     const prefName = getPrefNameByCharId(charId);
+    const stats = playerData.charStats[charId] || { level: 1, xp: 0, reformed: false };
+    const maxLv = getMaxLevel(char.rarity, stats.reformed);
 
     preview.innerHTML = `
-        <div class="preview-img-container">
-            <img src="${char.image}" class="preview-img">
+        <div class="preview-subtitle" style="margin-bottom: 2px;">${char.subtitle}</div>
+        <div class="preview-name" style="margin-bottom: 5px;">${prefName}</div>
+        <div class="preview-img-container" style="margin-bottom: 5px;">
+            <img src="${char.image}" class="preview-img" style="max-height: 180px;">
             <div class="grid-item-rarity">${"★".repeat(char.rarity)}</div>
         </div>
-        <div class="preview-subtitle">${char.subtitle}</div>
-        <div class="preview-name">${prefName}</div>
+        <div class="training-level" style="margin-bottom: 10px;  margin-top: 10px; font-size: 14px;">Lv <span>${stats.level}</span><span class="level-max-label"> / ${maxLv}</span></div>
+        ${buildStatsPanelHTML(charId, stats.level)}
     `;
 }

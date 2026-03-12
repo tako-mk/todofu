@@ -142,8 +142,8 @@ export function initGacha() {
 
     const updateDiamondUI = () => {
         // 全てのダイヤ表示（ガチャ画面、ホーム画面）を一括更新
-        document.querySelectorAll(".gacha-diamond-display, #home-diamond-display").forEach(el => {
-            el.textContent = `💎 ${playerData.diamond}`;
+        document.querySelectorAll(".gacha-diamond-display span, #home-diamond-display span").forEach(el => {
+            el.textContent = playerData.diamond;
         });
     };
     updateDiamondUI();

@@ -26,9 +26,15 @@ export function loadPlayerData() {
             "training_platinum": 1,
             "training_gold": 2,
             "training_silver": 5,
-            "training_bronze": 10
+            "training_bronze": 10,
+            "reform_ticket": 10
         },
-        charStats: {} // { charId: { level: 1, xp: 0 } }
+        charStats: {}, // { charId: { level: 1, xp: 0 } }
+        presents: [
+            { id: 1, name: "ダイヤ×1000", desc: "事前登録ありがとうございます！", type: "diamond", amount: 10000, icon: "💎" },
+            { id: 2, name: "コイン×5000", desc: "サービス開始記念プレゼントです。", type: "money", amount: 5000, icon: "💰" },
+            { id: 3, name: "ダイヤ×100", desc: "本日のログインボーナスです。", type: "diamond", amount: 100, icon: "💎" }
+        ]
     };
 
     const saved = JSON.parse(localStorage.getItem("todofu_save"));

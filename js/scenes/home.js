@@ -10,8 +10,8 @@ export function initHome() {
     if (img && char) img.src = char.image;
 
     // UI更新
-    const moneyEl = document.getElementById("home-money-display");
-    const diamondEl = document.getElementById("home-diamond-display");
-    if (moneyEl) moneyEl.textContent = `💰 ${data.money}`;
-    if (diamondEl) diamondEl.textContent = `💎 ${data.diamond}`;
+    const moneyEl = document.querySelector("#home-money-display span");
+    const diamondEl = document.querySelector("#home-diamond-display span");
+    if (moneyEl) moneyEl.textContent = data.money;
+    if (diamondEl) diamondEl.textContent = data.diamond;
 }

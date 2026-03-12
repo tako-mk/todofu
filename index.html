@@ -55,8 +55,15 @@
 
                 <div id="home-screen">
                     <div class="top-bar">
-                        <div id="home-money-display" class="money">💰 1200</div>
-                        <div id="home-diamond-display" class="diamond">💎 35</div>
+                        <div id="home-money-display" class="money currency-display">
+                            <img src="assets/images/coin.png" class="icon-coin" alt="coin"> <span>1200</span>
+                        </div>
+                        <div id="home-diamond-display" class="diamond currency-display">
+                            <img src="assets/images/diamond.png" class="icon-diamond" alt="diamond"> <span>35</span>
+                        </div>
+                    </div>
+                    <div class="side-controls">
+                        <button id="btn-present" class="present-btn">✉️</button>
                     </div>
                     <button id="btn-system-menu" class="system-menu-btn">☰</button>
 
@@ -82,7 +89,9 @@
                 <div id="gacha-screen">
                     <div class="gacha-header">
                         <button id="btn-gacha-back" class="back-button">◀ もどる</button>
-                        <div class="gacha-diamond-display">💎 35</div>
+                        <div class="gacha-diamond-display currency-display">
+                            <img src="assets/images/diamond.png" class="icon-diamond" alt="diamond"> <span>35</span>
+                        </div>
                     </div>
                     <div class="gacha-content-wrapper">
                         <!-- 左側のパネル（リスト＋操作ボタン） -->
@@ -109,11 +118,17 @@
                                 <div class="gacha-draw-buttons">
                                     <button class="gacha-draw-btn draw-single" data-count="1">
                                         <span class="draw-title">1回引く</span>
-                                        <span class="draw-cost">💎 100</span>
+                                        <span class="draw-cost currency-display">
+                                            <img src="assets/images/diamond.png" class="icon-diamond" alt="diamond">
+                                            <span>100</span>
+                                        </span>
                                     </button>
                                     <button class="gacha-draw-btn draw-multi" data-count="10">
                                         <span class="draw-title">10回引く</span>
-                                        <span class="draw-cost">💎 1000</span>
+                                        <span class="draw-cost currency-display">
+                                            <img src="assets/images/diamond.png" class="icon-diamond" alt="diamond">
+                                            <span>1000</span>
+                                        </span>
                                     </button>
                                 </div>
                             </div>
@@ -138,12 +153,14 @@
 
                                 <h2 class="modal-title">確認</h2>
 
-                                <p class="modal-text">
-                                    ダイヤを <span id="cost-before">100</span> 個消費して<br>
-                                    ガチャを引きますか？
+                                <p class="modal-text currency-display" style="justify-content: center;">
+                                    <img src="assets/images/diamond.png" class="icon-diamond" alt="diamond">
+                                    <span><span id="cost-before">100</span> 個消費して</span><br>
                                 </p>
+                                <p class="modal-text">ガチャを引きますか？</p>
                                 <p id="gacha-warning" class="gacha-warning"></p>
-                                <p class="modal-diamond">
+                                <p class="modal-diamond currency-display" style="justify-content: center;">
+                                    <img src="assets/images/diamond.png" class="icon-diamond" alt="diamond">
                                     <span id="diamond-before">500</span>個 →
                                     <span id="diamond-after">400</span>個
                                 </p>
@@ -241,6 +258,11 @@
                         <div id="formation-slots" class="formation-slots">
                             <!-- JSで5つのスロットを生成 -->
                         </div>
+
+                        <!-- 合計ステータス表示エリア -->
+                        <div id="formation-total-stats" class="formation-total-stats">
+                            <!-- JSで合計ステータスを生成 -->
+                        </div>
                     </div>
 
                     <!-- 育成キャラクター選択画面 -->
@@ -287,8 +309,27 @@
                                     <div class="expected-gain">
                                         獲得XP: <span id="xp-gain-value">0</span>
                                     </div>
-                                    <button id="btn-execute-training" class="btn-primary">育成開始</button>
+                                    <div class="training-action-buttons" style="display: flex; gap: 10px;">
+                                        <button id="btn-reform" class="btn-reform" style="display:none;">改革</button>
+                                        <button id="btn-execute-training" class="btn-primary">育成開始</button>
+                                    </div>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 改革確認モーダル -->
+                    <div id="reform-confirm-modal" class="modal" style="display: none;">
+                        <div class="modal-content">
+                            <h2 class="modal-title">改革の確認</h2>
+                            <p class="modal-text">「改革条例案」を1枚消費して<br>レベル上限を 60 に解放しますか？</p>
+                            <p class="modal-text" style="margin-top: 15px; font-weight: bold;">
+                                所持数: <span id="reform-item-before">0</span> → <span id="reform-item-after"
+                                    style="color: #e65100;">0</span>
+                            </p>
+                            <div class="modal-buttons" style="margin-top: 25px;">
+                                <button id="btn-cancel-reform" class="btn-cancel">やめる</button>
+                                <button id="btn-confirm-reform" class="btn-confirm">改革する</button>
                             </div>
                         </div>
                     </div>
@@ -447,6 +488,27 @@
                         <div class="modal-buttons">
                             <button id="btn-reset-cancel" class="btn-cancel">やめる</button>
                             <button id="btn-reset-confirm" class="btn-confirm danger">初期化する</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- プレゼント（手紙）モーダル -->
+                <div id="present-modal" class="modal-overlay" style="display: none;">
+                    <div class="present-modal-content">
+                        <div class="present-header">
+                            <h2>プレゼント</h2>
+                            <div class="header-actions">
+                                <button id="btn-present-claim-all" class="btn-claim-all">すべて受取</button>
+                                <button id="btn-close-present" class="profile-close-icon">×</button>
+                            </div>
+                        </div>
+                        <div class="present-body">
+                            <div id="present-list" class="present-list">
+                                <!-- JSでプレゼント項目を生成 -->
+                            </div>
+                            <div id="present-empty-msg" class="present-empty-msg" style="display: none;">
+                                受け取れるプレゼントはありません
+                            </div>
                         </div>
                     </div>
                 </div>

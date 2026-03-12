@@ -37,6 +37,47 @@ const itemIcons = {
     "training_bronze": "assets/images/items/bronze_tax_card.png"
 };
 
+// ---- ユーティリティ ----
+
+/** レアリティ別の最大レベルを返す。reformed=trueのとき上限解除(60) */
+export function getMaxLevel(rarity, reformed) {
+    if (reformed) return 60;
+    const caps = { 1: 30, 2: 40, 3: 50, 4: 50 };
+    return caps[rarity] ?? 50;
+}
+
+/**
+ * キャラのbaseStats × レベルボーナス(0.01%/Lv)を計算して返す
+ * 例: economy=70, level=30 → 70 × (1 + 0.0001×30) = 70.21
+ */
+export function calcEffectiveStats(charId, level) {
+    const base = characters_flat[charId]?.stats;
+    if (!base) return null;
+    const bonus = 1 + 0.0001 * (level - 1);
+    return {
+        economy: (base.economy * bonus).toFixed(2),
+        agriculture: (base.agriculture * bonus).toFixed(2),
+        industry: (base.industry * bonus).toFixed(2),
+        tourism: (base.tourism * bonus).toFixed(2)
+    };
+}
+
+/** 4数値パネルのHTML文字列を返す（2×2グリッド） */
+export function buildStatsPanelHTML(charId, level) {
+    const s = calcEffectiveStats(charId, level);
+    if (!s) return "";
+    return `
+        <div class="training-stats-panel">
+            <div class="stat-cell"><span class="stat-label">💰 経済</span><span class="stat-value">${s.economy}</span></div>
+            <div class="stat-cell"><span class="stat-label">🌾 農業</span><span class="stat-value">${s.agriculture}</span></div>
+            <div class="stat-cell"><span class="stat-label">🏭 工業</span><span class="stat-value">${s.industry}</span></div>
+            <div class="stat-cell"><span class="stat-label">🗺 観光</span><span class="stat-value">${s.tourism}</span></div>
+        </div>
+    `;
+}
+
+// ---- 初期化 ----
+
 export function initTraining() {
     const btnTraining = document.getElementById("btn-training");
     const todofuMenu = document.getElementById("todofu-menu");
@@ -57,19 +98,26 @@ export function initTraining() {
     document.getElementById("btn-training-filter").addEventListener("pointerdown", () => {
         const filterPanel = document.getElementById("filter-panel");
         if (filterPanel) {
-            renderNameFilterOptions(); // 都道府県リストを生成
+            renderNameFilterOptions();
             setFilterChangeCallback(() => {
                 renderSelectionGrid();
             });
             filterPanel.style.display = "flex";
-            // z-indexを高めにする (もし必要なら)
             filterPanel.style.zIndex = "1000";
         }
     });
 
     document.getElementById("btn-training-sort").addEventListener("pointerdown", () => {
-        sortMode = (sortMode === "rarity") ? "default" : "rarity";
-        document.getElementById("btn-training-sort").textContent = `↕ ソート: ${sortMode === "rarity" ? "レアリティ順" : "デフォルト順"}`;
+        if (sortMode === "rarity") {
+            sortMode = "level";
+            document.getElementById("btn-training-sort").textContent = "↕ ソート: レベル順";
+        } else if (sortMode === "level") {
+            sortMode = "default";
+            document.getElementById("btn-training-sort").textContent = "↕ ソート: デフォルト順";
+        } else {
+            sortMode = "rarity";
+            document.getElementById("btn-training-sort").textContent = "↕ ソート: レアリティ順";
+        }
         renderSelectionGrid();
     });
 
@@ -80,7 +128,14 @@ export function initTraining() {
     });
 
     document.getElementById("btn-execute-training").addEventListener("pointerdown", executeTraining);
+
+    // 改革ボタン関連
+    document.getElementById("btn-reform").addEventListener("pointerdown", showReformModal);
+    document.getElementById("btn-cancel-reform").addEventListener("pointerdown", closeReformModal);
+    document.getElementById("btn-confirm-reform").addEventListener("pointerdown", executeReform);
 }
+
+// ---- キャラ選択画面 ----
 
 function renderSelectionGrid() {
     playerData = loadPlayerData();
@@ -89,14 +144,17 @@ function renderSelectionGrid() {
 
     const canonicalIds = getAllCharacters().map(c => c.id);
 
-    let list = (playerData.collection || []).map(id => ({
-        id,
-        ...characters_flat[id],
-        prefName: getPrefNameByCharId(id),
-        orderIndex: canonicalIds.indexOf(id)
-    }));
+    let list = (playerData.collection || []).map(id => {
+        const stats = playerData.charStats[id] || { level: 1, xp: 0, reformed: false };
+        return {
+            id,
+            ...characters_flat[id],
+            prefName: getPrefNameByCharId(id),
+            orderIndex: canonicalIds.indexOf(id),
+            level: stats.level
+        };
+    });
 
-    // フィルタリングロジック
     // レアリティフィルター
     const rarityChecks = document.querySelectorAll(".filter-rarity-check:checked");
     const checkedRarities = rarityChecks.length > 0
@@ -111,13 +169,14 @@ function renderSelectionGrid() {
         if (checkedNames.length > 0) {
             list = list.filter(char => checkedNames.includes(char.prefName));
         } else {
-            list = []; // 明示的に「何も選択されていない」状態
+            list = [];
         }
     }
-    // どちらのチェックボックスも存在しない場合は、全表示（初期化のタイミング等）
 
     if (sortMode === "rarity") {
-        list.sort((a, b) => b.rarity - a.rarity || a.orderIndex - b.orderIndex);
+        list.sort((a, b) => b.rarity - a.rarity || b.level - a.level || a.orderIndex - b.orderIndex);
+    } else if (sortMode === "level") {
+        list.sort((a, b) => b.level - a.level || b.rarity - a.rarity || a.orderIndex - b.orderIndex);
     } else {
         list.sort((a, b) => a.orderIndex - b.orderIndex);
     }
@@ -128,6 +187,7 @@ function renderSelectionGrid() {
         charItem.innerHTML = `
             <img src="${char.image}" alt="">
             <div class="grid-item-rarity">${"★".repeat(char.rarity)}</div>
+            <div class="grid-item-level">Lv.${char.level}</div>
         `;
 
         charItem.addEventListener("pointerdown", () => {
@@ -154,22 +214,25 @@ function updateSelectionPreview(charId) {
 
     const char = characters_flat[charId];
     const prefName = getPrefNameByCharId(charId);
-    const stats = playerData.charStats[charId] || { level: 1, xp: 0 };
+    const stats = playerData.charStats[charId] || { level: 1, xp: 0, reformed: false };
+    const maxLv = getMaxLevel(char.rarity, stats.reformed);
 
     previewArea.innerHTML = `
         <div class="training-subtitle">${char.subtitle}</div>
-        <div class="training-name" style="font-size: 28px; margin-bottom: 15px;">${prefName}</div>
+        <div class="training-name" style="font-size: 28px;">${prefName}</div>
         <div class="preview-img-container">
-            <img src="${char.image}" style="max-height: 250px; margin-bottom: 20px;">
+            <img src="${char.image}" style="max-height: 200px; margin-bottom: 10px;">
             <div class="grid-item-rarity">${"★".repeat(char.rarity)}</div>
         </div>
-        <div class="training-level" style="margin-bottom: 5px;">Lv <span>${stats.level}</span></div>
+        <div class="training-level" style="margin-bottom: 5px;">Lv <span>${stats.level}</span><span class="level-max-label"> / ${maxLv}</span></div>
+        ${buildStatsPanelHTML(charId, stats.level)}
     `;
     confirmBtn.disabled = false;
 }
 
+// ---- 育成画面 ----
+
 function selectCharForTraining(charId) {
-    // 他の画面でもフィルターが効くようにリセット
     setFilterChangeCallback(null);
 
     currentTrainingCharId = charId;
@@ -191,33 +254,50 @@ function renderTrainingView() {
 
     playerData = loadPlayerData();
     const char = characters_flat[currentTrainingCharId];
-    const stats = playerData.charStats[currentTrainingCharId] || { level: 1, xp: 0 };
+    const stats = playerData.charStats[currentTrainingCharId] || { level: 1, xp: 0, reformed: false };
     const prefName = getPrefNameByCharId(currentTrainingCharId);
+    const maxLv = getMaxLevel(char.rarity, stats.reformed);
 
     document.getElementById("training-char-subtitle").textContent = char.subtitle;
     document.getElementById("training-char-name").textContent = prefName;
 
     const previewArea = document.getElementById("training-char-preview");
-    const existingElements = previewArea.querySelectorAll("img, .preview-img-container, .training-level-row, .training-xp-bar-container, .training-xp-text");
+    const existingElements = previewArea.querySelectorAll("img, .preview-img-container, .training-level-row, .training-xp-bar-container, .training-xp-text, .training-stats-panel");
     existingElements.forEach(el => el.remove());
 
     const contentScroll = document.createElement("div");
     contentScroll.style.width = "100%";
+
+    const atMax = stats.level >= maxLv;
+    const isRarity4 = char.rarity === 4;
+    const canReform = isRarity4 && stats.level >= 50 && !stats.reformed;
+
     contentScroll.innerHTML = `
         <div class="preview-img-container">
             <img src="${char.image}" alt="">
             <div class="grid-item-rarity">${"★".repeat(char.rarity)}</div>
         </div>
         <div class="training-level-row">
-            <div class="training-level">Lv <span>${stats.level}</span></div>
+            <div id="training-level-block" class="training-level">Lv <span id="training-current-lv">${stats.level}</span><span class="level-max-label"> / ${maxLv}</span></div>
+            ${atMax ? '<div class="level-max-badge">MAX</div>' : ''}
+            <div class="training-xp-bar-container" ${atMax ? 'style="display:none;"' : ''}>
+                <div class="training-xp-bar-fill" style="width: ${atMax ? 100 : calculateXPPerc(stats)}%"></div>
+                <div id="xp-bar-expected" class="training-xp-bar-expected" style="width: 0%"></div>
+            </div>
         </div>
-        <div class="training-xp-bar-container">
-            <div class="training-xp-bar-fill" style="width: ${calculateXPPerc(stats)}%"></div>
-            <div id="xp-bar-expected" class="training-xp-bar-expected" style="width: 0%"></div>
-        </div>
-        <div class="training-xp-text">NEXT: ${calculateNextXP(stats.level) - stats.xp}</div>
+        <div id="training-xp-text" class="training-xp-text">${atMax ? "レベル最大" : `NEXT: ${calculateNextXP(stats.level) - stats.xp}`}</div>
+        ${buildStatsPanelHTML(currentTrainingCharId, stats.level)}
     `;
     Array.from(contentScroll.children).forEach(child => previewArea.appendChild(child));
+
+    // 改革ボタン表示制御
+    const reformBtn = document.getElementById("btn-reform");
+    if (isRarity4 && !stats.reformed) {
+        reformBtn.style.display = "block";
+        reformBtn.disabled = !canReform;
+    } else {
+        reformBtn.style.display = "none";
+    }
 
     const itemsContainer = document.getElementById("training-items-container");
     itemsContainer.innerHTML = "";
@@ -284,11 +364,72 @@ function updateExpectedGain() {
     document.getElementById("xp-gain-value").textContent = totalGain;
     document.getElementById("btn-execute-training").disabled = totalGain === 0;
 
-    const stats = playerData.charStats[currentTrainingCharId] || { level: 1, xp: 0 };
-    const nextXP = calculateNextXP(stats.level);
-    const expectedXP = stats.xp + totalGain;
-    const expectedPerc = Math.min(100, (expectedXP / nextXP) * 100);
-    document.getElementById("xp-bar-expected").style.width = expectedPerc + "%";
+    const stats = playerData.charStats[currentTrainingCharId] || { level: 1, xp: 0, reformed: false };
+    const char = characters_flat[currentTrainingCharId];
+    const maxLv = getMaxLevel(char.rarity, stats.reformed);
+    const atMax = stats.level >= maxLv;
+
+    if (!atMax) {
+        // 現在のレベルと、シミュレートしたレベル・XPを計算
+        let simLevel = stats.level;
+        let simXp = stats.xp + totalGain;
+
+        while (simLevel < maxLv && simXp >= calculateNextXP(simLevel)) {
+            simXp -= calculateNextXP(simLevel);
+            simLevel++;
+        }
+
+        const isSimAtMax = simLevel >= maxLv;
+
+        // レベル数字の更新
+        const lvSpan = document.getElementById("training-current-lv");
+        if (lvSpan) {
+            lvSpan.textContent = simLevel;
+            // レベルが上がっていれば色を変える
+            if (simLevel > stats.level) {
+                lvSpan.style.color = "#ff5722";
+                lvSpan.style.textShadow = "0 0 8px rgba(255,87,34,0.4)";
+            } else {
+                lvSpan.style.color = "";
+                lvSpan.style.textShadow = "";
+            }
+        }
+
+        // テキストの更新
+        const textEl = document.getElementById("training-xp-text");
+        if (textEl) {
+            textEl.textContent = isSimAtMax ? "レベル最大" : `NEXT: ${calculateNextXP(simLevel) - simXp}`;
+        }
+
+        // バーの更新
+        if (isSimAtMax) {
+            document.getElementById("xp-bar-expected").style.width = "100%";
+        } else {
+            const nextXP = calculateNextXP(simLevel);
+            // 元のレベルより上がっていれば元の緑バーは無視する形になるが、ここではシンプルに
+            // 「現在到達しているシミュレートレベル」でのパーセンテージ幅をexpectedに設定する
+            // (実際にはFILLが0になりEXPECTEDが伸びるような見せ方も可能だが、今回はEXPECTEDの幅だけを計算)
+            const expectedPerc = Math.min(100, (simXp / nextXP) * 100);
+            document.getElementById("xp-bar-expected").style.width = expectedPerc + "%";
+            // 視覚的調整：もしレベルアップしている場合は、元のバーを0にするか、expectedを前面に出す
+            document.querySelector(".training-xp-bar-fill").style.width = (simLevel > stats.level) ? "0%" : calculateXPPerc(stats) + "%";
+        }
+    } else {
+        document.getElementById("xp-bar-expected").style.width = "0%";
+        document.getElementById("btn-execute-training").disabled = true;
+    }
+
+}
+
+/** XPを加算した後のレベルをシミュレートする */
+function simulateLevelAfterGain(stats, totalGain, maxLv) {
+    let level = stats.level;
+    let xp = stats.xp + totalGain;
+    while (level < maxLv && xp >= calculateNextXP(level)) {
+        xp -= calculateNextXP(level);
+        level++;
+    }
+    return level;
 }
 
 function calculateNextXP(level) {
@@ -300,9 +441,15 @@ function calculateXPPerc(stats) {
     return Math.min(100, (stats.xp / nextXP) * 100);
 }
 
+// ---- 育成実行 ----
+
 function executeTraining() {
     playerData = loadPlayerData();
-    const stats = playerData.charStats[currentTrainingCharId] || { level: 1, xp: 0 };
+    const stats = playerData.charStats[currentTrainingCharId] || { level: 1, xp: 0, reformed: false };
+    const char = characters_flat[currentTrainingCharId];
+    const maxLv = getMaxLevel(char.rarity, stats.reformed);
+
+    if (stats.level >= maxLv) return;
 
     let totalGain = 0;
     for (const key in useQuantities) {
@@ -316,9 +463,13 @@ function executeTraining() {
     if (totalGain === 0) return;
 
     stats.xp += totalGain;
-    while (stats.xp >= calculateNextXP(stats.level)) {
+    while (stats.level < maxLv && stats.xp >= calculateNextXP(stats.level)) {
         stats.xp -= calculateNextXP(stats.level);
         stats.level++;
+    }
+    // レベルが上限に達したらxpをリセット
+    if (stats.level >= maxLv) {
+        stats.xp = 0;
     }
 
     playerData.charStats[currentTrainingCharId] = stats;
@@ -326,4 +477,58 @@ function executeTraining() {
     resetUseQuantities();
     renderTrainingView();
     alert(`育成完了！ レベルが ${stats.level} になりました。`);
+}
+
+// ---- 改革 ----
+
+function showReformModal() {
+    if (!currentTrainingCharId) return;
+    playerData = loadPlayerData();
+    const stats = playerData.charStats[currentTrainingCharId] || { level: 1, xp: 0, reformed: false };
+    const char = characters_flat[currentTrainingCharId];
+
+    if (char.rarity !== 4) return;
+    if (stats.level < 50) return;
+    if (stats.reformed) return;
+
+    const reformItems = playerData.items["reform_ticket"] || 0;
+
+    document.getElementById("reform-item-before").textContent = reformItems;
+    document.getElementById("reform-item-after").textContent = Math.max(0, reformItems - 1);
+
+    const confirmBtn = document.getElementById("btn-confirm-reform");
+    if (reformItems < 1) {
+        confirmBtn.disabled = true;
+        confirmBtn.style.opacity = "0.5";
+    } else {
+        confirmBtn.disabled = false;
+        confirmBtn.style.opacity = "1";
+    }
+
+    document.getElementById("reform-confirm-modal").style.display = "flex";
+}
+
+function closeReformModal() {
+    document.getElementById("reform-confirm-modal").style.display = "none";
+}
+
+function executeReform() {
+    if (!currentTrainingCharId) return;
+    playerData = loadPlayerData();
+    const stats = playerData.charStats[currentTrainingCharId] || { level: 1, xp: 0, reformed: false };
+    const reformItems = playerData.items["reform_ticket"] || 0;
+
+    if (reformItems < 1) {
+        alert("改革条例案が不足しています！");
+        return;
+    }
+
+    stats.reformed = true;
+    playerData.items["reform_ticket"] = reformItems - 1;
+    playerData.charStats[currentTrainingCharId] = stats;
+    savePlayerData(playerData);
+
+    closeReformModal();
+    renderTrainingView();
+    alert("改革が完了しました！ レベル上限が60に解放されました。");
 }

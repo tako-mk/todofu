@@ -2,6 +2,12 @@
 export const characters = {
     hokkaido: {
         name: "北海道",
+        stats: {
+            economy: 70,
+            agriculture: 95,
+            industry: 60,
+            tourism: 90
+        },
         characters: {
             a: {
                 id: "hokkaido_a",
@@ -43,6 +49,12 @@ export const characters = {
     },
     aomori: {
         name: "青森県",
+        stats: {
+            economy: 40,
+            agriculture: 85,
+            industry: 40,
+            tourism: 70
+        },
         characters: {
             a: {
                 id: "aomori_a",
@@ -78,6 +90,12 @@ export const characters = {
     },
     akita: {
         name: "秋田県",
+        stats: {
+            economy: 35,
+            agriculture: 80,
+            industry: 35,
+            tourism: 65
+        },
         characters: {
             a: {
                 id: "akita_a",
@@ -113,6 +131,12 @@ export const characters = {
     },
     iwate: {
         name: "岩手県",
+        stats: {
+            economy: 35,
+            agriculture: 75,
+            industry: 45,
+            tourism: 60
+        },
         characters: {
             a: {
                 id: "iwate_a",
@@ -148,6 +172,12 @@ export const characters = {
     },
     yamagata: {
         name: "山形県",
+        stats: {
+            economy: 35,
+            agriculture: 80,
+            industry: 50,
+            tourism: 65
+        },
         characters: {
             a: {
                 id: "yamagata_a",
@@ -183,6 +213,12 @@ export const characters = {
     },
     miyagi: {
         name: "宮城県",
+        stats: {
+            economy: 65,
+            agriculture: 60,
+            industry: 60,
+            tourism: 75
+        },
         characters: {
             a: {
                 id: "miyagi_a",
@@ -224,6 +260,12 @@ export const characters = {
     },
     fukushima: {
         name: "福島県",
+        stats: {
+            economy: 50,
+            agriculture: 75,
+            industry: 70,
+            tourism: 65
+        },
         characters: {
             a: {
                 id: "fukushima_a",
@@ -259,6 +301,12 @@ export const characters = {
     },
     tochigi: {
         name: "栃木県",
+        stats: {
+            economy: 55,
+            agriculture: 70,
+            industry: 80,
+            tourism: 70
+        },
         characters: {
             a: {
                 id: "tochigi_a",
@@ -294,6 +342,12 @@ export const characters = {
     },
     ibaraki: {
         name: "茨城県",
+        stats: {
+            economy: 60,
+            agriculture: 85,
+            industry: 75,
+            tourism: 65
+        },
         characters: {
             a: {
                 id: "ibaraki_a",
@@ -341,6 +395,12 @@ export const characters = {
     },
     chiba: {
         name: "千葉県",
+        stats: {
+            economy: 85,
+            agriculture: 75,
+            industry: 85,
+            tourism: 80
+        },
         characters: {
             a: {
                 id: "chiba_a",
@@ -376,6 +436,12 @@ export const characters = {
     },
     gunma: {
         name: "群馬県",
+        stats: {
+            economy: 55,
+            agriculture: 70,
+            industry: 85,
+            tourism: 70
+        },
         characters: {
             a: {
                 id: "gunma_a",
@@ -423,6 +489,12 @@ export const characters = {
     },
     saitama: {
         name: "埼玉県",
+        stats: {
+            economy: 85,
+            agriculture: 60,
+            industry: 80,
+            tourism: 65
+        },
         characters: {
             a: {
                 id: "saitama_a",
@@ -458,6 +530,12 @@ export const characters = {
     },
     tokyo: {
         name: "東京都",
+        stats: {
+            economy: 100,
+            agriculture: 10,
+            industry: 80,
+            tourism: 95
+        },
         characters: {
             a: {
                 id: "tokyo_a",
@@ -493,6 +571,12 @@ export const characters = {
     },
     kanagawa: {
         name: "神奈川県",
+        stats: {
+            economy: 95,
+            agriculture: 30,
+            industry: 95,
+            tourism: 90
+        },
         characters: {
             a: {
                 id: "kanagawa_a",
@@ -528,6 +612,12 @@ export const characters = {
     },
     aichi: {
         name: "愛知県",
+        stats: {
+            economy: 95,
+            agriculture: 65,
+            industry: 100,
+            tourism: 75
+        },
         characters: {
             a: {
                 id: "aichi_a",
@@ -563,6 +653,12 @@ export const characters = {
     },
     gifu: {
         name: "岐阜県",
+        stats: {
+            economy: 50,
+            agriculture: 60,
+            industry: 75,
+            tourism: 80
+        },
         characters: {
             a: {
                 id: "gifu_a",
@@ -598,6 +694,12 @@ export const characters = {
     },
     yamanashi: {
         name: "山梨県",
+        stats: {
+            economy: 45,
+            agriculture: 65,
+            industry: 55,
+            tourism: 90
+        },
         characters: {
             a: {
                 id: "yamanashi_a",
@@ -627,6 +729,12 @@ export const characters = {
     },
     niigata: {
         name: "新潟県",
+        stats: {
+            economy: 55,
+            agriculture: 90,
+            industry: 65,
+            tourism: 75
+        },
         characters: {
             a: {
                 id: "niigata_a",
@@ -656,6 +764,12 @@ export const characters = {
     },
     shizuoka: {
         name: "静岡県",
+        stats: {
+            economy: 75,
+            agriculture: 80,
+            industry: 90,
+            tourism: 90
+        },
         characters: {
             a: {
                 id: "shizuoka_a",
@@ -691,6 +805,12 @@ export const characters = {
     },
     ishikawa: {
         name: "石川県",
+        stats: {
+            economy: 55,
+            agriculture: 60,
+            industry: 70,
+            tourism: 90
+        },
         characters: {
             a: {
                 id: "ishikawa_a",
@@ -726,6 +846,12 @@ export const characters = {
     },
     nagano: {
         name: "長野県",
+        stats: {
+            economy: 60,
+            agriculture: 85,
+            industry: 80,
+            tourism: 90
+        },
         characters: {
             a: {
                 id: "nagano_a",
@@ -755,6 +881,12 @@ export const characters = {
     },
     toyama: {
         name: "富山県",
+        stats: {
+            economy: 60,
+            agriculture: 75,
+            industry: 90,
+            tourism: 70
+        },
         characters: {
             a: {
                 id: "toyama_a",
@@ -784,6 +916,12 @@ export const characters = {
     },
     fukui: {
         name: "福井県",
+        stats: {
+            economy: 50,
+            agriculture: 65,
+            industry: 75,
+            tourism: 70
+        },
         characters: {
             a: {
                 id: "fukui_a",
@@ -813,6 +951,12 @@ export const characters = {
     },
     kyoto: {
         name: "京都府",
+        stats: {
+            economy: 85,
+            agriculture: 40,
+            industry: 70,
+            tourism: 100
+        },
         characters: {
             a: {
                 id: "kyoto_a",
@@ -854,6 +998,12 @@ export const characters = {
     },
     mie: {
         name: "三重県",
+        stats: {
+            economy: 65,
+            agriculture: 75,
+            industry: 85,
+            tourism: 90
+        },
         characters: {
             a: {
                 id: "mie_a",
@@ -895,6 +1045,12 @@ export const characters = {
     },
     osaka: {
         name: "大阪府",
+        stats: {
+            economy: 95,
+            agriculture: 20,
+            industry: 95,
+            tourism: 90
+        },
         characters: {
             a: {
                 id: "osaka_a",
@@ -930,6 +1086,12 @@ export const characters = {
     },
     nara: {
         name: "奈良県",
+        stats: {
+            economy: 50,
+            agriculture: 55,
+            industry: 45,
+            tourism: 100
+        },
         characters: {
             a: {
                 id: "nara_a",
@@ -971,6 +1133,12 @@ export const characters = {
     },
     hyogo: {
         name: "兵庫県",
+        stats: {
+            economy: 75,
+            agriculture: 65,
+            industry: 90,
+            tourism: 85
+        },
         characters: {
             a: {
                 id: "hyogo_a",
@@ -1012,6 +1180,12 @@ export const characters = {
     },
     wakayama: {
         name: "和歌山県",
+        stats: {
+            economy: 45,
+            agriculture: 90,
+            industry: 50,
+            tourism: 85
+        },
         characters: {
             a: {
                 id: "wakayama_a",
@@ -1053,6 +1227,12 @@ export const characters = {
     },
     shiga: {
         name: "滋賀県",
+        stats: {
+            economy: 55,
+            agriculture: 65,
+            industry: 80,
+            tourism: 85
+        },
         characters: {
             a: {
                 id: "shiga_a",
@@ -1088,6 +1268,12 @@ export const characters = {
     },
     ehime: {
         name: "愛媛県",
+        stats: {
+            economy: 50,
+            agriculture: 90,
+            industry: 60,
+            tourism: 85
+        },
         characters: {
             a: {
                 id: "ehime_a",
@@ -1117,6 +1303,12 @@ export const characters = {
     },
     kagawa: {
         name: "香川県",
+        stats: {
+            economy: 55,
+            agriculture: 65,
+            industry: 60,
+            tourism: 70
+        },
         characters: {
             a: {
                 id: "kagawa_a",
@@ -1146,6 +1338,12 @@ export const characters = {
     },
     kochi: {
         name: "高知県",
+        stats: {
+            economy: 40,
+            agriculture: 75,
+            industry: 40,
+            tourism: 80
+        },
         characters: {
             a: {
                 id: "kochi_a",
@@ -1175,6 +1373,12 @@ export const characters = {
     },
     tokushima: {
         name: "徳島県",
+        stats: {
+            economy: 45,
+            agriculture: 80,
+            industry: 50,
+            tourism: 70
+        },
         characters: {
             a: {
                 id: "tokushima_a",
@@ -1210,6 +1414,12 @@ export const characters = {
     },
     okayama: {
         name: "岡山県",
+        stats: {
+            economy: 65,
+            agriculture: 70,
+            industry: 90,
+            tourism: 75
+        },
         characters: {
             a: {
                 id: "okayama_a",
@@ -1245,6 +1455,12 @@ export const characters = {
     },
     hiroshima: {
         name: "広島県",
+        stats: {
+            economy: 80,
+            agriculture: 65,
+            industry: 95,
+            tourism: 90
+        },
         characters: {
             a: {
                 id: "hiroshima_a",
@@ -1274,6 +1490,12 @@ export const characters = {
     },
     tottori: {
         name: "鳥取県",
+        stats: {
+            economy: 35,
+            agriculture: 75,
+            industry: 35,
+            tourism: 75
+        },
         characters: {
             a: {
                 id: "tottori_a",
@@ -1309,6 +1531,12 @@ export const characters = {
     },
     shimane: {
         name: "島根県",
+        stats: {
+            economy: 35,
+            agriculture: 70,
+            industry: 35,
+            tourism: 80
+        },
         characters: {
             a: {
                 id: "shimane_a",
@@ -1338,6 +1566,12 @@ export const characters = {
     },
     yamaguchi: {
         name: "山口県",
+        stats: {
+            economy: 55,
+            agriculture: 60,
+            industry: 85,
+            tourism: 75
+        },
         characters: {
             a: {
                 id: "yamaguchi_a",
@@ -1367,6 +1601,12 @@ export const characters = {
     },
     fukuoka: {
         name: "福岡県",
+        stats: {
+            economy: 90,
+            agriculture: 60,
+            industry: 85,
+            tourism: 90
+        },
         characters: {
             a: {
                 id: "fukuoka_a",
@@ -1402,6 +1642,12 @@ export const characters = {
     },
     nagasaki: {
         name: "長崎県",
+        stats: {
+            economy: 55,
+            agriculture: 45,
+            industry: 70,
+            tourism: 95
+        },
         characters: {
             a: {
                 id: "nagasaki_a",
@@ -1437,6 +1683,12 @@ export const characters = {
     },
     oita: {
         name: "大分県",
+        stats: {
+            economy: 50,
+            agriculture: 60,
+            industry: 80,
+            tourism: 90
+        },
         characters: {
             a: {
                 id: "oita_a",
@@ -1472,6 +1724,12 @@ export const characters = {
     },
     kagoshima: {
         name: "鹿児島県",
+        stats: {
+            economy: 60,
+            agriculture: 85,
+            industry: 55,
+            tourism: 90
+        },
         characters: {
             a: {
                 id: "kagoshima_a",
@@ -1507,6 +1765,12 @@ export const characters = {
     },
     saga: {
         name: "佐賀県",
+        stats: {
+            economy: 40,
+            agriculture: 80,
+            industry: 60,
+            tourism: 65
+        },
         characters: {
             a: {
                 id: "saga_a",
@@ -1542,6 +1806,12 @@ export const characters = {
     },
     kumamoto: {
         name: "熊本県",
+        stats: {
+            economy: 60,
+            agriculture: 85,
+            industry: 65,
+            tourism: 85
+        },
         characters: {
             a: {
                 id: "kumamoto_a",
@@ -1577,6 +1847,12 @@ export const characters = {
     },
     miyazaki: {
         name: "宮崎県",
+        stats: {
+            economy: 45,
+            agriculture: 85,
+            industry: 45,
+            tourism: 85
+        },
         characters: {
             a: {
                 id: "miyazaki_a",
@@ -1612,6 +1888,12 @@ export const characters = {
     },
     okinawa: {
         name: "沖縄県",
+        stats: {
+            economy: 50,
+            agriculture: 40,
+            industry: 30,
+            tourism: 100
+        },
         characters: {
             a: {
                 id: "okinawa_a",
